@@ -8,10 +8,10 @@
  * Controller of the wavesApp
  */
 angular.module('wavesApp')
-  .controller('WeatherCtrl', function () {
-    this.weatherToday = {day: new Date(new Date().getTime()+(0*24*60*60*1000)), min:"15.0", max: "19.0"};
+  .controller('WeatherCtrl', function ($scope) {
+    $scope.weatherToday = {day: new Date(new Date().getTime()+(0*24*60*60*1000)), min:"15.0", max: "19.0"};
 
-    this.weatherNext5days = [
+    $scope.weatherNext5days = [
       {day: new Date(new Date().getTime()+(0*24*60*60*1000)), min:"15.0", max: "19.0"},
       {day: new Date(new Date().getTime()+(1*24*60*60*1000)), min:"15.0", max: "19.0"},
       {day: new Date(new Date().getTime()+(2*24*60*60*1000)), min:"15.0", max: "19.0"},

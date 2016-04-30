@@ -22,9 +22,9 @@
     <![endif]-->
 
     <div class="container-fluid">
-      <div class="row">
+      <div class="row main-row">
         <div class="col-md-3" ng-controller='HollidaysCtrl as hollidays'>
-          <p ng-repeat="holliday in hollidays.hollidays">
+          <p ng-repeat="holliday in hollidays">
             <span>{{ holliday.desc }}</span><span class="pull-right"> en {{ holliday.days }} dias</span>
           </p>
         </div>
@@ -36,30 +36,33 @@
         </div>
 
         <div class="col-md-3 pull-right text-right" ng-controller='WeatherCtrl as weather'>
-          <div class="row" ng-repeat="weather in weather.weatherNext5days">
+          <div class="row" ng-repeat="weather in weatherNext5days">
             <div class="col-md-4">{{weather.day | date: 'EEEE'}}</div>
             <div class="col-md-4">{{weather.min}}</div>
             <div class="col-md-4">{{weather.max}}</div>
           </div>
         </div>
       </div>
+      
+      <div class="content-row">
+        <div class="row">
+          <div class="col-md-offset-9 col-md-3 text-right" ng-controller="CommunicatorCtrl as communicator">
+            <p ng-repeat="act in validActions">
+              <a ui-sref="{{act.state}}">{{ act.name }}</a>
+            </p>
+          </div>
+        </div>
 
-      <div class="row">
-        <div class="col-md-offset-9 col-md-3 text-right" ng-controller="CommunicatorCtrl as communicator">
-          <p ng-repeat="act in communicator.validActions">
-            <a ui-sref="{{act.state}}">{{ act.name }}</a>
-          </p>
+        <div class="row navbar navbar-fixed-bottom text-center">
+          <div class="col-md-12" ng-controller="NewsCtrl as news">
+            <p ng-repeat="notice in latestNews" ng-show="$index == currentNotice">
+              <i class="fa fa-twitter fa-3x"></i>
+              {{notice}}
+            </p>
+          </div>
         </div>
       </div>
 
-      <div class="row navbar navbar-fixed-bottom">
-        <div class="col-md-offset-2 col-md-8" ng-controller="NewsCtrl as news">
-          <p ng-repeat="notice in latestNews" ng-show="$index == currentNotice">
-            <i class="fa fa-twitter fa-3x"></i>
-            {{notice}}
-          </p>
-        </div>
-      </div>
       <div ui-view=""></div>
     </div>
 

@@ -8,8 +8,8 @@
  * Controller of the wavesApp
  */
 angular.module('wavesApp')
-  .controller('HollidaysCtrl', function () {
-    this.hollidays = [
+  .controller('HollidaysCtrl', function ($scope) {
+    $scope.hollidays = [
       { desc: 'HTML5 Boilerplate', days: 5},
       { desc: 'HTML5 Boilerplate', days: 4},
       { desc: 'HTML5 Boilerplate', days: 3},

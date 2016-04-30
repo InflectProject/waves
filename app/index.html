@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+  </head>
+  <body ng-app="wavesApp">
+    <!--[if lte IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-3" ng-controller='HollidaysCtrl as hollidays'>
+          <p ng-repeat="holliday in hollidays.hollidays">
+            <span>{{ holliday.desc }}</span><span class="pull-right"> en {{ holliday.days }} dias</span>
+          </p>
+        </div>
+        
+        <div class="col-md-6 text-center" ng-controller='TimeCtrl as time'>
+          <p>{{ clock | date: 'fullDate' }} </p>
+          <span>{{ clock | date:'HH:mm'}}</span>
+          <span>{{ clock | date:'ss'}}</span>
+        </div>
+
+        <div class="col-md-3 pull-right text-right" ng-controller='WeatherCtrl as weather'>
+          <div class="row" ng-repeat="weather in weather.weatherNext5days">
+            <div class="col-md-4">{{weather.day | date: 'EEEE'}}</div>
+            <div class="col-md-4">{{weather.min}}</div>
+            <div class="col-md-4">{{weather.max}}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-offset-9 col-md-3 text-right" ng-controller="CommunicatorCtrl as communicator">
+          <p ng-repeat="act in communicator.validActions">
+            <a ui-sref="{{act.state}}">{{ act.name }}</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="row navbar navbar-fixed-bottom">
+        <div class="col-md-offset-2 col-md-8" ng-controller="NewsCtrl as news">
+          <p ng-repeat="notice in latestNews" ng-show="$index == currentNotice">
+            <i class="fa fa-twitter fa-3x"></i>
+            {{notice}}
+          </p>
+        </div>
+      </div>
+      <div ui-view=""></div>
+    </div>
+
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+     <script>
+       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+       }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script>
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/i18n/angular-locale_es-ar.js"></script>
+        <script src="scripts/controllers/time.js"></script>
+        <script src="scripts/controllers/hollidays.js"></script>
+        <script src="scripts/controllers/weather.js"></script>
+        <script src="scripts/controllers/communicator.js"></script>
+        <script src="scripts/controllers/news.js"></script>
+        <!-- endbuild -->
+</body>
+</html>

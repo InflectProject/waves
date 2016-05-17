@@ -20,7 +20,7 @@ angular.module('wavesApp')
       'Noticia7Noticia7Noticia7Noticia7Noticia7Noticia7Noticia7Noticia7Noticia7',
       'Noticia8Noticia8Noticia8Noticia8Noticia8Noticia8Noticia8Noticia8Noticia8',
       'Noticia9Noticia9Noticia9Noticia9Noticia9Noticia9Noticia9Noticia9Noticia9',
-      'Noticia10Noticia10Noticia10Noticia10Noticia10Noticia10Noticia10Noticia10Noticia10',
+      'Noticia10Noticia10Noticia10Noticia10Noticia10Noticia10Noticia10Noticia10',
     ];
 
     $interval(function(){

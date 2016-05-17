@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>wavesApp</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -23,46 +23,48 @@
 
     <div class="container-fluid">
       <div class="row main-row">
-        <div class="col-md-3" ng-controller='HollidaysCtrl as hollidays'>
-          <p ng-repeat="holliday in hollidays">
+        <div class="col-md-3 hollidays" ng-controller='HollidaysCtrl as hollidays'>
+          <p ng-repeat="holliday in hollidays" class="holliday-item">
             <span>{{ holliday.desc }}</span><span class="pull-right"> en {{ holliday.days }} dias</span>
           </p>
         </div>
         
-        <div class="col-md-6 text-center" ng-controller='TimeCtrl as time'>
-          <p>{{ clock | date: 'fullDate' }} </p>
-          <span>{{ clock | date:'HH:mm'}}</span>
-          <span>{{ clock | date:'ss'}}</span>
+        <div class="col-md-6 text-center time" ng-controller='TimeCtrl as time'>
+          <p class="time-day">{{ clock | date: 'fullDate' | capitalize:'all' }} </p>
+          <span class="time-hour-min">{{ clock | date:'HH:mm'}}</span>
+          <span class="time-sec">{{ clock | date:'ss'}}</span>
         </div>
 
-        <div class="col-md-3 pull-right text-right" ng-controller='WeatherCtrl as weather'>
-          <div class="row" ng-repeat="weather in weatherNext5days">
-            <div class="col-md-4">{{weather.day | date: 'EEEE'}}</div>
-            <div class="col-md-4">{{weather.min}}</div>
-            <div class="col-md-4">{{weather.max}}</div>
+        <div class="col-md-3 pull-right text-right weather" ng-controller='WeatherCtrl as weather'>
+          <div class="row forecast-item" ng-repeat="weather in forecast">
+            <span class="col-md-3 text-right weather-day">{{weather.day | date: 'EEE' | capitalize:'all'}}</span>
+            <span class="col-md-3 weather-icon">{{weather.icon}}</span>
+            <span class="col-md-3 weather-min-temp">{{weather.min}}&deg;</span>
+            <span class="col-md-3 weather-max-temp">{{weather.max}}&deg;</span>
           </div>
         </div>
       </div>
-      
+
       <div class="content-row">
-        <div class="row">
-          <div class="col-md-offset-9 col-md-3 text-right" ng-controller="CommunicatorCtrl as communicator">
+        <div class="row  vertical-align">
+          <div class="col-md-offset-9 col-md-3 text-right communicator" ng-controller="CommunicatorCtrl as communicator">
             <p ng-repeat="act in validActions">
               <a ui-sref="{{act.state}}">{{ act.name }}</a>
             </p>
           </div>
         </div>
 
-        <div class="row navbar navbar-fixed-bottom text-center">
-          <div class="col-md-12" ng-controller="NewsCtrl as news">
-            <p ng-repeat="notice in latestNews" ng-show="$index == currentNotice">
-              <i class="fa fa-twitter fa-3x"></i>
-              {{notice}}
+        <div class="row text-center newsRow navbar navbar-fixed-bottom"> <!--   -->
+          <div class="col-md-12 newsContent news" ng-controller="NewsCtrl as news">
+            <p ng-repeat="notice in latestNews">
+              <span ng-show="$index == currentNotice">
+                <i class="fa fa-twitter fa-3x"></i>
+                <span class="news-content">{{notice}}</span>
+              </span>
             </p>
           </div>
         </div>
       </div>
-
       <div ui-view=""></div>
     </div>
 
@@ -91,6 +93,7 @@
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-capitalize-filter/capitalize.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 

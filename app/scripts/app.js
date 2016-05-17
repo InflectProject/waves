@@ -17,7 +17,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ui.router'
+    'ui.router',
+    'puigcerber.capitalize'
   ])
   .config(function ($stateProvider, $routeProvider) {
     $routeProvider

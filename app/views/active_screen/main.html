@@ -1,20 +1,5 @@
 <div class="content-row">
-  <div class="row">
-    <div class="col-md-3 communicator pull-right" ng-controller="CommunicatorCtrl as communicator">
-      <div ng-repeat="act in validActions" class="text-right">
-        <a ui-sref="{{act.state}}">{{ act.name }}</a>
-      </div>
-    </div>
-  </div>
+  <communicator/>
 
-  <div class="row text-center newsRow navbar navbar-fixed-bottom"> <!--   -->
-    <div class="col-md-12 newsContent news" ng-controller="NewsCtrl as news">
-      <p ng-repeat="notice in news.latest">
-        <span class="news-content" ng-show="$index == news.currentIndex && news.show">
-          <i class="fa fa-twitter"></i>
-          {{notice}}
-        </span>
-      </p>
-    </div>
-  </div>
+  <news-bar class="text-center navbar navbar-fixed-bottom"/>
 </div>

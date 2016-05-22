@@ -32,7 +32,7 @@ angular
         url: '/active_screen',
         views: {
           'top_left_content': { 
-            'templateUrl': "views/active_screen/hollidays_detail.html" 
+            'template': "<holliday-detail/>" 
           },
           'content': { 
             'templateUrl': "views/active_screen/main.html" 
@@ -59,7 +59,7 @@ angular
         url: '/news',
         views: {
           'content': {
-            'templateUrl': "views/responses/news.html"
+            'template': "<news-response/>"
           }
         }
       })
@@ -67,7 +67,7 @@ angular
         url: '/events',
         views: {
           'content': {
-            'templateUrl': "views/responses/events.html"
+            'template': "<events-response/>"
           }
         }
       })      
@@ -75,7 +75,7 @@ angular
         url: '/weather',
         views: {
           'content': {
-            'templateUrl': "views/responses/weather.html"
+            'template': "<weather-response/>"
           }
         }
       });

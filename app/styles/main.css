@@ -49,6 +49,8 @@ body {
 /*  letter-spacing: -2px;
   font-size: 75px;*/
   font-family: "HelveticaNeue-Light";
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 .fa-twitter{

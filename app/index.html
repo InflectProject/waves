@@ -13,6 +13,7 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/bootstrap_override.css">
     <link rel="stylesheet" href="styles/animations.css">
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/components.css">
@@ -26,7 +27,6 @@
     <div class="container-fluid">
       <div class="row main-row">
         <div class="col-md-3"><div ui-view="top_left_content"></div></div>
-        
         
         <div class="col-md-6 text-center time" ng-controller='TimeCtrl as time' ui-sref="active_screen">
           <p class="time-day">{{ clock | date: 'fullDate' | capitalize:'all' }} </p>
@@ -44,7 +44,7 @@
         </div>
       </div>
 
-      <div ui-view="content"></div>
+      <div class="row" ui-view="content"></div>
     </div>
 
 
@@ -84,6 +84,10 @@
         <script src="scripts/controllers/weather.js"></script>
         <script src="scripts/controllers/communicator.js"></script>
         <script src="scripts/controllers/news.js"></script>
+        <script src="scripts/directives/communicator.js"></script>
+        <script src="scripts/directives/newsbar.js"></script>
+        <script src="scripts/directives/hollidaydetail.js"></script>
+        <script src="scripts/directives/responses/newsresponse.js"></script>
         <!-- endbuild -->
 </body>
 </html>

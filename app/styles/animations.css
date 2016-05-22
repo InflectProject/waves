@@ -1,10 +1,9 @@
-
 .ng-leave{
   position: relative;
 }
-.ng-enter {
+/*.ng-enter {
   position: absolute;
-}
+}*/
 .ng-hide-add, .ng-hide-remove {
   display: block!important;
 }

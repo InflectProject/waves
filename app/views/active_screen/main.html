@@ -9,10 +9,10 @@
 
   <div class="row text-center newsRow navbar navbar-fixed-bottom"> <!--   -->
     <div class="col-md-12 newsContent news" ng-controller="NewsCtrl as news">
-      <p ng-repeat="notice in latestNews">
-        <span ng-show="$index == currentNotice">
-          <i class="fa fa-twitter fa-3x"></i>
-          <span class="news-content">{{notice}}</span>
+      <p ng-repeat="notice in news.latest">
+        <span class="news-content" ng-show="$index == news.currentIndex && news.show">
+          <i class="fa fa-twitter"></i>
+          {{notice}}
         </span>
       </p>
     </div>

@@ -23,10 +23,13 @@ angular.module('wavesApp')
       'Noticia10Noticia10Noticia10Noticia10Noticia10Noticia10Noticia10Noticia10',
     ];
 
+    $scope.currentNews = $scope.latestNews[$scope.currentNotice];
+
     $interval(function(){
       $scope.currentNotice = ($scope.currentNotice + 1) % $scope.latestNews.length;
-      if($scope.currentNotice == 0){
+      $scope.currentNews = $scope.latestNews[$scope.currentNotice];
+      if($scope.currentNotice === 0){
         console.log('WAVES::' + 'Request new news page');
       }
-    }, 5000)
+    }, 5000);
   });

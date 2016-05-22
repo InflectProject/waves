@@ -22,32 +22,62 @@ angular
   ])
   .config(function ($stateProvider, $routeProvider) {
     $routeProvider
-      // .when('/', {
-      //   templateUrl: 'views/main.html',
-      //   controller: 'MainCtrl',
-      //   controllerAs: 'main'
-      // })
-      // .when('/about', {
-      //   templateUrl: 'views/about.html',
-      //   controller: 'AboutCtrl',
-      //   controllerAs: 'about'
-      // })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/active_screen'
       });
 
     $stateProvider
-      .state('home', {
-        url: '/'
-      })      
+      .state('home', { url: '/' })
+      .state('active_screen', {
+        url: '/active_screen',
+        views: {
+          'top_left_content': { 
+            'templateUrl': "views/active_screen/hollidays_detail.html" 
+          },
+          'content': { 
+            'templateUrl': "views/active_screen/main.html" 
+          }
+        }
+      })
+      .state('talk', {
+        url: '/talk',
+        views: {
+          'content': { 
+            'templateUrl': "views/talk/voice_wave.html" 
+          }
+        }
+      })
+      .state('waiting_response', {
+        url: '/waiting_response',
+        views: {
+          'content': { 
+            'templateUrl': "views/talk/loading.html" 
+          }
+        }
+      })
       .state('news', {
-        url: '/news'
+        url: '/news',
+        views: {
+          'content': {
+            'templateUrl': "views/responses/news.html"
+          }
+        }
       })
       .state('events', {
-        url: '/events'
+        url: '/events',
+        views: {
+          'content': {
+            'templateUrl': "views/responses/events.html"
+          }
+        }
       })      
       .state('weather', {
-        url: '/weather'
-      })
+        url: '/weather',
+        views: {
+          'content': {
+            'templateUrl': "views/responses/weather.html"
+          }
+        }
+      });
       
   });

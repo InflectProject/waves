@@ -27,21 +27,8 @@
     <div class="container-fluid">
       <div class="row main-row">
         <div class="col-md-3"><div ui-view="top_left_content"></div></div>
-        
-        <div class="col-md-6 text-center time" ng-controller='TimeCtrl as time' ui-sref="active_screen">
-          <p class="time-day">{{ clock | date: 'fullDate' | capitalize:'all' }} </p>
-          <span class="time-hour-min">{{ clock | date:'HH:mm'}}</span>
-          <span class="time-sec">{{ clock | date:'ss'}}</span>
-        </div>
-
-        <div class="col-md-3 pull-right text-right weather" ng-controller='WeatherCtrl as weather'>
-          <div class="row forecast-item" ng-repeat="weather in forecast">
-            <span class="col-md-3 text-right weather-day">{{weather.day | date: 'EEE' | capitalize:'all'}}</span>
-            <span class="col-md-3 weather-icon">{{weather.icon}}</span>
-            <span class="col-md-3 weather-min-temp">{{weather.min}}&deg;</span>
-            <span class="col-md-3 weather-max-temp">{{weather.max}}&deg;</span>
-          </div>
-        </div>
+        <div class="col-md-6"><clock ui-sref="active_screen"/></div>
+        <div class="col-md-3"><div ui-view="top_right_content"></div></div>
       </div>
 
       <div class="row" ui-view="content"></div>
@@ -88,6 +75,10 @@
         <script src="scripts/directives/newsbar.js"></script>
         <script src="scripts/directives/hollidaydetail.js"></script>
         <script src="scripts/directives/responses/newsresponse.js"></script>
+        <script src="scripts/directives/forecastdetail.js"></script>
+        <script src="scripts/controllers/boot.js"></script>
+        <script src="scripts/directives/bootwave.js"></script>
+        <script src="scripts/directives/clock.js"></script>
         <!-- endbuild -->
 </body>
 </html>

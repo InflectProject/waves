@@ -8,13 +8,14 @@
   display: block!important;
 }
 .ng-enter, .ng-leave, .ng-hide-add, .ng-hide-remove {
-  -webkit-transition: -webkit-transform 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940), opacity 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940);
-     -moz-transition:    -moz-transform 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940), opacity 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940);
-       -o-transition:    -o-transform   0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940), opacity 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940);
-          transition:       transform   0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940), opacity 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+  -webkit-transition: all 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+     -moz-transition: all 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+       -o-transition: all 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+          transition: all 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940);
 }
 .ng-enter, .ng-leave.ng-leave-active{
   opacity: 0;
+  /*transform: translate(0, 10px);*/
 }
 .ng-enter.ng-enter-active {
   opacity: 1;

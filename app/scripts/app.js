@@ -27,12 +27,22 @@ angular
       });
 
     $stateProvider
-      .state('home', { url: '/' })
+      .state('home', { 
+        url: '/',
+        views: {
+          'content': { 
+            'templateUrl': "views/boot.html" 
+          }
+        }
+      })
       .state('active_screen', {
         url: '/active_screen',
         views: {
           'top_left_content': { 
             'template': "<holliday-detail/>" 
+          },
+          'top_right_content': { 
+            'template': "<forecast-detail/>" 
           },
           'content': { 
             'templateUrl': "views/active_screen/main.html" 

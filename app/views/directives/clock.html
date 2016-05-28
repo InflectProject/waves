@@ -1,0 +1,5 @@
+<div class="text-center time" ng-controller='TimeCtrl as time' ui-sref="active_screen">
+  <p class="time-day">{{ clock | date: 'fullDate' | capitalize:'all' }} </p>
+  <span class="time-hour-min">{{ clock | date:'HH:mm'}}</span>
+  <span class="time-sec">{{ clock | date:'ss'}}</span>
+</div>

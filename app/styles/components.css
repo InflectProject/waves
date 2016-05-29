@@ -53,7 +53,7 @@
 }
 
 
-.news-content{
+.news-content, .talk-result{
   font-size: 40px;
   font-family: "HelveticaNeue-UltraLight";
 }
@@ -75,4 +75,15 @@
 .loading .fa{
   display: table-cell;
   vertical-align: middle;
+}
+
+.talk-result .interim{
+  opacity: 0.5;
+}
+
+.talk-result{
+  opacity:1;
+  font-size: 75px;
+  font-family: "HelveticaNeue-UltraLight";
+  letter-spacing: -3px;
 }

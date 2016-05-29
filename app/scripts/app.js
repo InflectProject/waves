@@ -52,8 +52,8 @@ angular
       .state('talk', {
         url: '/talk',
         views: {
-          'content': { 
-            'templateUrl': "views/talk/voice_wave.html" 
+          'content': {             
+            'template': "<voice-wave/>" 
           }
         }
       })
@@ -61,7 +61,7 @@ angular
         url: '/waiting_response',
         views: {
           'content': { 
-            'template': "<loading />" 
+            'template': "<loading/>" 
           }
         }
       })

@@ -9,10 +9,10 @@
  */
 angular.module('wavesApp')
   .controller('BootCtrl', function ($scope, $timeout, $state, $window) {
-    $scope.onLoad=function(){
+    function onLoad(){
       $state.go('active_screen');
-    };
+    }
     // angular.element($window).bind('load', $scope.onLoad);
 
-    $timeout($scope.onLoad, 2000);
+    $timeout(onLoad, 2000);
   });

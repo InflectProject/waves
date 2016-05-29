@@ -65,3 +65,14 @@
 .news-response{
   font-size: 1.5em;
 }
+
+.loading{
+  position : absolute;
+  display: table;
+  width: 100%; /* This could be ANY width */
+  height: 50%; /* This could be ANY height */
+}
+.loading .fa{
+  display: table-cell;
+  vertical-align: middle;
+}

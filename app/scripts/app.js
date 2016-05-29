@@ -61,7 +61,7 @@ angular
         url: '/waiting_response',
         views: {
           'content': { 
-            'templateUrl': "views/talk/loading.html" 
+            'template': "<loading />" 
           }
         }
       })

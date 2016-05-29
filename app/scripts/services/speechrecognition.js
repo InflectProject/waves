@@ -22,12 +22,7 @@ angular.module('wavesApp')
           final: recognition.isFinal
         });
       }
-
-      function SpeechRecognitionException(message) {
-        this.name = 'SpeechRecognitionException';
-        this.message = message;
-      }
-
+      
       var recognizer,
           defaultOptions={
             continuous: false,

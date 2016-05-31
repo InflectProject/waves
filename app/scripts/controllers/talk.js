@@ -15,9 +15,6 @@ angular.module('wavesApp')
       try {      
         $scope.speechRecognition = speechRecognition.init({ lang: 'es-AR' }, 
           {
-            onspeechstart: function onSpeechStart(e){
-              console.log(e);
-            }, 
             onresult: function onResult(result){
               result = $scope.speechRecognition.filterResult(result);
               

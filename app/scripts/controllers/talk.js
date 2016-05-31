@@ -14,31 +14,39 @@ angular.module('wavesApp')
 
       try {      
         $scope.speechRecognition = speechRecognition.init({ lang: 'es-AR' }, 
-                                                          function onResult(result){
-                                                            $scope.isInterim = !result.final;
-                                                            $scope.result = result.text;
+          {
+            onspeechstart: function onSpeechStart(e){
+              console.log(e);
+            }, 
+            onresult: function onResult(result){
+              result = $scope.speechRecognition.filterResult(result);
+              
 
-                                                            if(result.final){
-                                                              speechSynthesis.say(result.text, {lang:'es-AR'});
-                                                              
-                                                              $timeout(function() { 
-                                                                $state.go('waiting_response');
-                                                              }, 1000);
-                                                            }
-                                                          }, 
-                                                          function onEnd(){
-                                                            $scope.speechRecognition.stop();
-                                                            if($scope.noSpeech){
-                                                              $scope.speechRecognition.start();
-                                                              $scope.noSpeech=false;
-                                                            }
-                                                          }, 
-                                                          function onError(e){
-                                                            if(e.error==='no-speech'){
-                                                              $scope.noSpeech=true;
-                                                              // speechSynthesis.say('No te oigo', {lang:'es-AR'});
-                                                            }
-                                                          });
+              $scope.isInterim = !result.final;
+              $scope.result = result.text;
+
+              if(result.final){
+                speechSynthesis.say(result.text, {lang:'es-AR'});
+                
+                $timeout(function() { 
+                  $state.go('waiting_response');
+                }, 1000);
+              }
+            },
+            onend: function onEnd(){
+              $scope.speechRecognition.stop();
+              if($scope.noSpeech){
+                $scope.speechRecognition.start();
+                $scope.noSpeech=false;
+              }
+            },
+            onerror: function onError(e){
+              if(e.error==='no-speech'){
+                $scope.noSpeech=true;
+                // speechSynthesis.say('No te oigo', {lang:'es-AR'}); 
+              }
+            }
+          });
 
         $scope.speechRecognition.start();
       }catch(e){

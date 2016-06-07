@@ -22,7 +22,9 @@ angular.module('wavesApp')
         
         msg.text=what;
         msg.lang=options.lang;
-        msg.voice=speechSynthesis.getVoices().filter(voice => voice.lang.indexOf(options.lang.split('-')[0]) >= 0)[options.voiceIndex];
+        msg.voice=speechSynthesis.getVoices().filter(function(voice){
+          return voice.lang.indexOf(options.lang.split('-')[0]) >= 0;
+        })[options.voiceIndex];
         speechSynthesis.speak(msg);
       }
     };

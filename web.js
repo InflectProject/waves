@@ -1,11 +1,23 @@
 'use strict';
 
-var gzippo = require('gzippo');
-var express = require('express');
-var nodeApp = express();
+var express = require("express");
+var path = require("path");
+var bodyParser = require("body-parser");
 
-nodeApp.use(express.logger('dev'));
-nodeApp.use(gzippo.staticGzip('' + __dirname + '/dist'));
-nodeApp.listen(process.env.PORT || 5000);
 
+var app = express();
+app.use(express.static(__dirname + "/dist"));
+app.use(bodyParser.json());
+
+// Initialize the app.
+var server = app.listen(process.env.PORT || 8080, function () {
+  var port = server.address().port;
+  console.log("App now running on port", port);
+});
+
+// Generic error handler used by all endpoints.
+ function handleError(res, reason, message, code) {
+   console.log("ERROR: " + reason);
+   res.status(code || 500).json({"error": message});
+ }
 

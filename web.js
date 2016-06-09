@@ -6,7 +6,7 @@ var bodyParser = require("body-parser");
 
 
 var app = express();
-app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/dist"));
 app.use(bodyParser.json());
 
 // Initialize the app.
@@ -21,7 +21,3 @@ var server = app.listen(process.env.PORT || 8080, function () {
    res.status(code || 500).json({"error": message});
  }
 
-
-app.get("/", function(req, res) {
-  //res.status(200);
-});

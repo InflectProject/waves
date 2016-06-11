@@ -1,4 +1,4 @@
-<div class="pull-right text-right weather" ng-controller='WeatherCtrl as weather'>
+<div class="pull-right text-right weather">
   <div class="row forecast-item" ng-repeat="weather in forecast">
     <span class="col-md-3 text-right weather-day">{{weather.day | date: 'EEE' | capitalize:'all'}}</span>
     <span class="col-md-3 weather-icon">{{weather.icon}}</span>

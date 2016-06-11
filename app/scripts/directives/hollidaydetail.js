@@ -10,6 +10,7 @@ angular.module('wavesApp')
   .directive('hollidayDetail', function () {
     return {
       templateUrl: 'views/directives/hollidays_detail.html',
-      restrict: 'E'
+      restrict: 'E',
+      controller: 'HollidaysCtrl'
     };
   });

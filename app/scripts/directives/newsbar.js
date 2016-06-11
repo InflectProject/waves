@@ -10,6 +10,8 @@ angular.module('wavesApp')
   .directive('newsBar', function () {
     return {
       templateUrl: 'views/directives/news_bar.html',
-      restrict: 'E'
+      restrict: 'E',
+      controller: 'NewsCtrl',
+      controllerAs:'news'
     };
   });

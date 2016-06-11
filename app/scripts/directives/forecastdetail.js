@@ -10,6 +10,7 @@ angular.module('wavesApp')
   .directive('forecastDetail', function () {
     return {
       templateUrl: 'views/directives/forecast_detail.html',
-      restrict: 'E'
+      restrict: 'E',
+      controller: 'WeatherCtrl'
     };
   });

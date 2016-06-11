@@ -10,6 +10,7 @@ angular.module('wavesApp')
   .directive('voiceWave', function () {
     return {
       templateUrl: 'views/directives/voice_wave.html',
-      restrict: 'E'
+      restrict: 'E',
+      controller: 'TalkCtrl'
     };
   });

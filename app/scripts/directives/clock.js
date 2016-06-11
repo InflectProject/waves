@@ -10,6 +10,8 @@ angular.module('wavesApp')
   .directive('clock', function () {
     return {
       templateUrl: 'views/directives/clock.html',
-      restrict: 'E'
+      restrict: 'E',
+      controller:'TimeCtrl',
+      controllerAs: 'time'
     };
   });

@@ -146,8 +146,12 @@ angular
 
       
       $rootScope.$on('$stateChangeStart', function(ev, next, nextParams, from, fromParams){
-        if((from.name != next.name) && (next.name == "active_screen") && ($rootScope.speechRecognition.isStopped()))
-          $rootScope.speechRecognition.start();
-
+        if((from.name != next.name) && (next.name == "active_screen") && ($rootScope.speechRecognition.isStopped())){
+          try{
+            $rootScope.speechRecognition.start();
+          }catch(e){
+            console.warn(e);
+          }
+        }
       });
     }]);

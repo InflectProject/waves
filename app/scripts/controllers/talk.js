@@ -8,11 +8,14 @@
  * Controller of the wavesApp
  */
 angular.module('wavesApp')
-  .controller('TalkCtrl', ['$rootScope', '$scope', '$state',  
-    function ($rootScope, $scope, $state) {
-      // console.log($rootScope.speechResult);
-
-      //send to server
-      //receive response
-      //$state.go response_type
+  .controller('TalkCtrl', ['$rootScope', '$scope', '$state', 'InflectionsAPIService',  
+    function ($rootScope, $scope, $state, InflectionsAPIService) {
+      InflectionsAPIService.sendRecognition($rootScope.speechResult.result).then(
+      function success(){
+        console.info(arguments)
+        //receive response
+        //$state.go response_type
+      }, function error(){
+        console.error(arguments);
+      })
   }]);

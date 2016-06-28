@@ -10,6 +10,8 @@ angular.module('wavesApp')
   .directive('loading', function () {
     return {
       templateUrl: 'views/directives/loading.html',
-      restrict: 'E'
+      replace:true,
+      restrict: 'E',
+      controller: 'TalkCtrl'
     };
   });

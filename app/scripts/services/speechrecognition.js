@@ -20,11 +20,12 @@ angular.module('wavesApp')
       init: function(options, listeners){
         $window.SpeechRecognition = ($window.webkitSpeechRecognition || 
                                      $window.SpeechRecognition);
-        if(SpeechRecognition!== undefined){          
+        if(SpeechRecognition !== undefined){          
           recognizer = new $window.SpeechRecognition();
 
           options = angular.extend({}, defaultOptions, options, listeners);
           Object.assign(recognizer, options);
+          recognizer._started=false;
           return this;
         }else{
           throw(new SpeechRecognitionException('Unable to initialize SpeechRecognizer. HTML5 SpeechRecognition not supported on your browser. '));
@@ -33,6 +34,7 @@ angular.module('wavesApp')
       start: function() {
         if(recognizer){
           recognizer.start();
+          recognizer._started=true;
         }
         else{
           throw(new SpeechRecognitionException('Unable to start recognizer. Initialize the recognizer first!'));
@@ -41,14 +43,22 @@ angular.module('wavesApp')
       stop: function() {
         if(recognizer){
           recognizer.stop();
+          recognizer._started=false;
         }
         else{
           throw(new SpeechRecognitionException('Unable to start recognizer. Initialize the recognizer first!'));
         }
       },
+      isStarted: function(){
+        return recognizer._started;
+      },
+      isStopped: function(){
+        return !recognizer._started;
+      },
       abort: function() {
         if(recognizer){
           recognizer.abort();
+          recognizer._started=false;
         }
         else{
           throw(new SpeechRecognitionException('Unable to start recognizer. Initialize the recognizer first!'));

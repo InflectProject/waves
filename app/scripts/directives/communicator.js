@@ -10,6 +10,7 @@ angular.module('wavesApp')
   .directive('communicator', function () {
     return {
       templateUrl: 'views/directives/communicator.html',
+      replace:true,
       restrict: 'E',
       controller: 'CommunicatorCtrl'
     };

@@ -11,6 +11,7 @@ angular.module('wavesApp')
     return {
       template: '<div id="boot-wave"></div>',
       restrict: 'E',
+      replace:true,
       controller: 'BootCtrl', 
       link: function postLink(scope, element) {
         element.text('Booting...');

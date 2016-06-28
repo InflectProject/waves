@@ -31,7 +31,7 @@ angular
         url: '/',
         views: {
           'content': { 
-            'templateUrl': "views/boot.html" 
+            'templateUrl': 'views/boot.html' 
           }
         }
       })
@@ -39,13 +39,13 @@ angular
         url: '/active_screen',
         views: {
           'top_left_content': { 
-            'template': "<holliday-detail/>" 
+            'template': '<holliday-detail/>' 
           },
           'top_right_content': { 
-            'template': "<forecast-detail/>" 
+            'template': '<forecast-detail/>' 
           },
           'content': { 
-            'templateUrl': "views/active_screen/main.html" 
+            'templateUrl': 'views/active_screen/main.html' 
           }
         }
       })
@@ -53,7 +53,7 @@ angular
         url: '/talk',
         views: {
           'content': {             
-            'template': "<voice-wave/>" 
+            'template': '<voice-wave/>' 
           }
         }
       })
@@ -61,7 +61,7 @@ angular
         url: '/waiting_response',
         views: {
           'content': { 
-            'template': "<loading/>" 
+            'template': '<loading/>' 
           }
         }
       })
@@ -69,7 +69,7 @@ angular
         url: '/news',
         views: {
           'content': {
-            'template': "<news-response/>"
+            'template': '<news-response/>'
           }
         }
       })
@@ -77,7 +77,7 @@ angular
         url: '/events',
         views: {
           'content': {
-            'template': "<events-response/>"
+            'template': '<events-response/>'
           }
         }
       })      
@@ -85,9 +85,69 @@ angular
         url: '/weather',
         views: {
           'content': {
-            'template': "<weather-response/>"
+            'template': '<weather-response/>'
           }
         }
       });
-      
   });
+
+ angular
+  .module('wavesApp').run(['$rootScope', 'speechSynthesis', 'speechRecognition', '$state', '$timeout', function($rootScope, speechSynthesis, speechRecognition, $state, $timeout){
+      $rootScope.speechResult={};
+      $rootScope.speechWasEnded=false;
+
+      try{
+        $rootScope.speechRecognition = speechRecognition.init({ lang: 'es-AR' }, 
+        {
+          onspeechstart: function(e){
+            $rootScope.speechResult={};
+            $state.go('talk');
+            $rootScope.$emit('speechstart');
+          },
+          onresult: function onResult(complete_result){
+            var result = $rootScope.speechRecognition.filterResult(complete_result);
+
+            $rootScope.speechResult.isInterim = !result.final;
+            $rootScope.speechResult.result = result.text;
+
+            if(result.final){
+              speechSynthesis.say(result.text, {lang:'es-AR'});
+              $rootScope.speechRecognition.stop();
+              $rootScope.speechResult.stopSpeech=true;
+
+              $timeout(function() { 
+                $state.go('waiting_response');
+              }, 1000);
+            }
+          },
+          onend: function onEnd(e){
+            if($rootScope.speechWasEnded){
+              $state.go('active_screen');
+              $rootScope.speechWasEnded=false;
+            }
+
+            $rootScope.speechRecognition.stop();
+            if(!$rootScope.speechResult.stopSpeech){
+              $rootScope.speechRecognition.start();
+              $rootScope.speechWasEnded=!$rootScope.speechWasEnded;
+            }
+          },
+          onerror: function onError(e){
+            $rootScope.speechResult.noSpeech=(e.error==='no-speech');
+          }
+        });
+
+        $rootScope.speechRecognition.start();
+        
+      }catch(e){
+        $rootScope.speechResult.result = e.message;
+        $rootScope.speechResult.speechRecognitionNotSupported=true;
+      }
+
+      
+      $rootScope.$on('$stateChangeStart', function(ev, next, nextParams, from, fromParams){
+        if((from.name != next.name) && (next.name == "active_screen") && ($rootScope.speechRecognition.isStopped()))
+          $rootScope.speechRecognition.start();
+
+      });
+    }]);

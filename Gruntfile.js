@@ -25,8 +25,6 @@ module.exports = function (grunt) {
     dist: 'dist'
   };
   
-  grunt.loadNpmTasks('grunt-html2js');
-  
   // Define the configuration for all the tasks
   grunt.initConfig({
 
@@ -336,17 +334,6 @@ module.exports = function (grunt) {
         }]
       }
     },
-    //html2js: {
-    //  options: {
-    //    module: 'wavesApp',
-    //    htmlmin: '<%= htmlmin.dist.options %>',
-    //    quoteChar: '\''
-    //  },
-    //  main: {
-    //    src: ['app/views/**/*.html'],
-    //    dest: '.tmp/templates.js'
-    //  },
-    //},
     ngtemplates: {
       dist: {
         options: {
@@ -491,7 +478,6 @@ module.exports = function (grunt) {
     'concurrent:dist',
     'postcss',
     'ngtemplates',
-    //'html2js',
     'concat',
     'ngAnnotate',
     'copy:dist',

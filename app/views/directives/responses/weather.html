@@ -1,0 +1,17 @@
+<div class="col-md-offset-2 col-md-8 weather-response">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h1>
+        {{weatherToday.day | date: 'EEE' | capitalize}}
+        <i class="wi wi-{{weatherToday.icon}}"></i> 
+      </h1>
+      ( {{weatherToday.min}}&deg; | {{weatherToday.max}}&deg; )
+    </div>
+  </div>
+
+  <ul class="weather-list list-group text-center">
+    <li ng-repeat="weather in forecast" class="list-group-item">
+      {{weather.day | date: 'EEE' | capitalize }} <i class="wi wi-{{weather.icon}}"></i> ( {{weather.min}}&deg; | {{weather.max}}&deg; )
+    </li>
+  </ul>
+</div>

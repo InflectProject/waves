@@ -40,7 +40,7 @@
 }
 
 
-.weather{
+.weather, .weather-response{
   font-size: 20px;
   letter-spacing: 0px;
   font-family: "HelveticaNeue-Light";
@@ -51,7 +51,9 @@
 .weather-day{
   color: #aaa;
 }
-
+.weather-response .panel h1{
+  display: inline;
+}
 
 .news-content, .talk-result{
   font-size: 40px;

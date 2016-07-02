@@ -9,7 +9,7 @@
 angular.module('wavesApp')
   .directive('weatherResponse', function () {
     return {
-      templateUrl: '/views/directives/responses/weather.html',
+      templateUrl: 'views/directives/responses/weather.html',
       replace: true,
       restrict: 'E',
       controller: 'WeatherCtrl'

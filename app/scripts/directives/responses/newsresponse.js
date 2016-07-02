@@ -9,7 +9,7 @@
 angular.module('wavesApp')
   .directive('newsResponse', function () {
     return {
-      templateUrl: '/views/directives/responses/news.html',
+      templateUrl: 'views/directives/responses/news.html',
       replace: true,
       restrict: 'E',
       controller: 'NewsCtrl'

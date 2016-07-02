@@ -60,7 +60,7 @@
   font-family: "HelveticaNeue-UltraLight";
 }
 
-.communicator{  }
+.communicator{ position:absolute; right:0px; }
 
 
 

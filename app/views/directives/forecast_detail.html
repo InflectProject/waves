@@ -1,8 +1,8 @@
 <div class="pull-right text-right weather">
   <div class="row forecast-item" ng-repeat="weather in forecast">
-    <span class="col-md-3 text-right weather-day">{{weather.day | date: 'EEE' | capitalize:'all'}}</span>
-    <span class="col-md-3 weather-icon">{{weather.icon}}</span>
-    <span class="col-md-3 weather-min-temp">{{weather.min}}&deg;</span>
-    <span class="col-md-3 weather-max-temp">{{weather.max}}&deg;</span>
+    <span class="col-md-offset-1 col-md-3 text-right weather-day">{{ weather.day | date: 'EEE' | capitalize }}</span>
+    <span class="col-md-1 weather-icon"><i class="wi wi-{{ weather.icon }}"></i></span>
+    <span class="col-md-3 weather-min-temp">{{ weather.min }}&deg;</span>
+    <span class="col-md-3 weather-max-temp">{{ weather.max }}&deg;</span>
   </div>
 </div>

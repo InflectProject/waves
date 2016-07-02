@@ -32,6 +32,8 @@ module.exports = function(config) {
       'bower_components/angular-touch/angular-touch.js',
       'bower_components/angular-ui-router/release/angular-ui-router.js',
       'bower_components/angular-capitalize-filter/capitalize.js',
+      'bower_components/holderjs/holder.js',
+      'bower_components/angular-holderjs/src/holder.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

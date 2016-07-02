@@ -10,6 +10,10 @@
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="bower_components/weather-icons/css/weather-icons.css" />
+    <link rel="stylesheet" href="bower_components/weather-icons/css/weather-icons.min.css" />
+    <link rel="stylesheet" href="bower_components/weather-icons/css/weather-icons-wind.css" />
+    <link rel="stylesheet" href="bower_components/weather-icons/css/weather-icons-wind.min.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -30,7 +34,7 @@
         <div class="col-md-6"><clock ui-sref="active_screen"/></div>
         <div class="col-md-3"><div ui-view="top_right_content"></div></div>
       </div>
-
+      <div class="row"><communicator/></div>
       <div class="row" ui-view="content"></div>
     </div>
 
@@ -60,6 +64,8 @@
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/angular-capitalize-filter/capitalize.js"></script>
+    <script src="bower_components/holderjs/holder.js"></script>
+    <script src="bower_components/angular-holderjs/src/holder.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -77,6 +83,8 @@
         <script src="scripts/directives/newsbar.js"></script>
         <script src="scripts/directives/hollidaydetail.js"></script>
         <script src="scripts/directives/responses/newsresponse.js"></script>
+        <script src="scripts/directives/responses/eventsresponse.js"></script>
+        <script src="scripts/directives/responses/weatherresponse.js"></script>
         <script src="scripts/directives/forecastdetail.js"></script>
         <script src="scripts/controllers/boot.js"></script>
         <script src="scripts/directives/bootwave.js"></script>
@@ -86,6 +94,7 @@
         <script src="scripts/controllers/talk.js"></script>
         <script src="scripts/directives/voicewave.js"></script>
         <script src="scripts/services/inflectionsapiservice.js"></script>
+        <script src="scripts/controllers/events.js"></script>
         <!-- endbuild -->
 </body>
 </html>

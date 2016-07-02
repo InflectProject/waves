@@ -16,6 +16,8 @@ angular.module('wavesApp')
           initialData.hollidays=result.data.hollidays;
         });
         InflectionsAPIService.getInitialData('forecast', 5).then(function(result){
+          //A los iconos que llegan hay que borrar el substring forecast-io
+          //https://erikflowers.github.io/weather-icons/api-list.html
           initialData.forecast=result.data.forecast;
         });
         InflectionsAPIService.getInitialData('news', 10).then(function(result){

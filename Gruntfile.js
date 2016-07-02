@@ -25,8 +25,6 @@ module.exports = function (grunt) {
     dist: 'dist'
   };
   
-  grunt.loadNpmTasks('grunt-html2js');
-  
   // Define the configuration for all the tasks
   grunt.initConfig({
 
@@ -336,17 +334,6 @@ module.exports = function (grunt) {
         }]
       }
     },
-    //html2js: {
-    //  options: {
-    //    module: 'wavesApp',
-    //    htmlmin: '<%= htmlmin.dist.options %>',
-    //    quoteChar: '\''
-    //  },
-    //  main: {
-    //    src: ['app/views/**/*.html'],
-    //    dest: '.tmp/templates.js'
-    //  },
-    //},
     ngtemplates: {
       dist: {
         options: {
@@ -355,7 +342,7 @@ module.exports = function (grunt) {
           usemin: 'scripts/scripts.js'
         },
         cwd: '<%= yeoman.app %>',
-        src: 'views/{,*/}*.html',
+        src: 'views/{,**/}*.html',
         dest: '.tmp/templateCache.js'
       }
     },
@@ -394,12 +381,14 @@ module.exports = function (grunt) {
             'images/{,*/}*.{webp}',
             'styles/fonts/{,*/}*.*'
           ]
-        }, {
+        }, 
+        {
           expand: true,
           cwd: '.tmp/images',
           dest: '<%= yeoman.dist %>/images',
           src: ['generated/*']
-        }, {
+        }, 
+        {
           expand: true,
           cwd: 'bower_components/bootstrap/dist',
           src: 'fonts/*',
@@ -410,6 +399,13 @@ module.exports = function (grunt) {
           dot: true,
           cwd: 'bower_components/components-font-awesome', // change this for font-awesome
           src: ['fonts/*.*'],
+          dest: '<%= yeoman.dist %>'
+        },
+        {
+          expand: true,
+          dot: true,
+          cwd: 'bower_components/weather-icons', // change this for font-awesome
+          src: ['font/*.*'],
           dest: '<%= yeoman.dist %>'
         }]
       },
@@ -482,7 +478,6 @@ module.exports = function (grunt) {
     'concurrent:dist',
     'postcss',
     'ngtemplates',
-    //'html2js',
     'concat',
     'ngAnnotate',
     'copy:dist',

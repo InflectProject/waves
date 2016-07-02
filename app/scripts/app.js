@@ -18,7 +18,8 @@ angular
     'ngSanitize',
     'ngTouch',
     'ui.router',
-    'puigcerber.capitalize'
+    'puigcerber.capitalize',
+    'ngHolder'
   ])
   .config(function ($stateProvider, $routeProvider) {
     $routeProvider
@@ -146,7 +147,7 @@ angular
 
       
       $rootScope.$on('$stateChangeStart', function(ev, next, nextParams, from, fromParams){
-        if((from.name != next.name) && (next.name == "active_screen") && ($rootScope.speechRecognition.isStopped())){
+        if((from.name != next.name) && (next.name == "active_screen") && ($rootScope.speechRecognition) && ($rootScope.speechRecognition.isStopped())){
           try{
             $rootScope.speechRecognition.start();
           }catch(e){

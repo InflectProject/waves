@@ -1,14 +1,28 @@
-<div>
-  <p>
-    Hearing... 
-  </p>
+<div class="col-md-12">
+  <div class="row">
+    <div class="col-md-12">
+      <p ng-if="!speechResult.speechRecognitionNotSupported">
+        Hearing... 
+      </p>
+    </div>
+  </div>
 
-  <div class="text-center navbar navbar-fixed-bottom">
-    <div class="col-md-12 talk" ng-class="{ notSupported : speechResult.speechRecognitionNotSupported}">
-      <i class="fa fa-microphone fa-4x"></i>
-      <span class="talk-result">
-        <span ng-class="{ interim: speechResult.isInterim }">{{ speechResult.result }}</span>
-      </span>
+  <div class="row" ng-if="speechResult.speechRecognitionNotSupported">  
+    <div class="col-md-12">
+      <img ng-src="images/sad-computer.jpg" class="center-block img-responsive">
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-12">
+      <div class="text-center navbar navbar-fixed-bottom">
+        <div class="talk" ng-class="{ notSupported : speechResult.speechRecognitionNotSupported}">
+          <i class="fa fa-microphone fa-4x"></i>
+          <span class="talk-result">
+            <span ng-class="{ interim: speechResult.isInterim }">{{ speechResult.result }}</span>
+          </span>
+        </div>
+      </div>
     </div>
   </div>
 </div>

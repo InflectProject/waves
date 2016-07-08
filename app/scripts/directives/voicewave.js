@@ -10,7 +10,7 @@ angular.module('wavesApp')
   .directive('voiceWave', function () {
     return {
       templateUrl: 'views/directives/voice_wave.html',
-      replace:true,
+      replace: true,
       restrict: 'E'
     };
   });

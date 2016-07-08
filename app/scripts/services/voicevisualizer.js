@@ -81,15 +81,20 @@ angular.module('wavesApp')
           // var visualSetting = 'sinewave';
 
           analyser.fftSize = 2048;
-          var bufferLength = analyser.fftSize;
+          var bufferLength = analyser.frequencyBinCount;
+          // var bufferLength = analyser.fftSize;
 
           var dataArray = new Uint8Array(bufferLength);
+          var reflectedDataArray = new Uint8Array(bufferLength);
+          reflectedDataArray.set(dataArray.reverse(), dataArray);
 
           canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
 
           function draw() {
             drawVisual = requestAnimationFrame(draw);
-            analyser.getByteTimeDomainData(dataArray);
+            analyser.getByteFrequencyData(dataArray);
+            // analyser.getByteTimeDomainData(dataArray);
+
             canvasCtx.fillStyle = 'rgb(0, 0, 0)';
             canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
             canvasCtx.lineWidth = 2;
@@ -100,16 +105,16 @@ angular.module('wavesApp')
             var x = 0;
 
             for(var i = 0; i < bufferLength; i++) {
-              var v = dataArray[i] / 128.0;
-              var y = v * HEIGHT/2;
+              var v = dataArray[i];
+              var y = (HEIGHT-HEIGHT/4) - v;
               if(i === 0) {
                 canvasCtx.moveTo(x, y);
               } else {
                 canvasCtx.lineTo(x, y);
               }
-              x += sliceWidth;
+              x += 3*sliceWidth;
             }
-            canvasCtx.lineTo(canvas.width, canvas.height/2);
+            canvasCtx.lineTo(WIDTH, HEIGHT/2);
             canvasCtx.stroke();
           };
 

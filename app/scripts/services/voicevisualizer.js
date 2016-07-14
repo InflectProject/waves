@@ -41,6 +41,20 @@ angular.module('wavesApp')
       var WIDTH;
       var HEIGHT;
 
+      var _frequency = 1.5;
+      var _phase = 0;
+      var _amplitude = 1.0;
+      var _whiteValue = 1.0;
+      var _idleAmplitude = 0.1;
+      var _dampingAmplitude = 1;
+      var _dampingFactor = 0.86;
+      var _waves = 1;
+      var _waveWidth = 2;
+      var _phaseShift = -0.15;
+      var _density = 5.0;
+      var _maxAmplitude = 0.5;
+
+
       return {
         init: function( cnvs ){
           // set up canvas context for visualizer
@@ -52,7 +66,7 @@ angular.module('wavesApp')
 
           //main block for doing the audio recording
           if ($window.navigator.getUserMedia) {
-            console.log('getUserMedia supported.');
+            // console.log('getUserMedia supported.');
             $window.navigator.getUserMedia ( 
               { audio: true },
               function(stream) {
@@ -67,10 +81,10 @@ angular.module('wavesApp')
                 $window.cancelAnimationFrame(drawVisual);
               },
               function(err) {
-                console.log('The following gUM error occured: ' + err);
+                // console.log('The following gUM error occured: ' + err);
               });
           } else {
-            console.log('getUserMedia not supported on your browser!');
+            // console.log('getUserMedia not supported on your browser!');
           }
           this.visualize();
           return this;
@@ -78,15 +92,11 @@ angular.module('wavesApp')
         visualize: function (){
           WIDTH = canvas.width;
           HEIGHT = canvas.height;
-          // var visualSetting = 'sinewave';
-
           analyser.fftSize = 2048;
           var bufferLength = analyser.frequencyBinCount;
           // var bufferLength = analyser.fftSize;
 
           var dataArray = new Uint8Array(bufferLength);
-          var reflectedDataArray = new Uint8Array(bufferLength);
-          reflectedDataArray.set(dataArray.reverse(), dataArray);
 
           canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
 
@@ -103,16 +113,39 @@ angular.module('wavesApp')
 
             var sliceWidth = WIDTH * 1.0 / bufferLength;
             var x = 0;
-
+            
             for(var i = 0; i < bufferLength; i++) {
-              var v = dataArray[i];
-              var y = (HEIGHT-HEIGHT/4) - v;
-              if(i === 0) {
-                canvasCtx.moveTo(x, y);
-              } else {
-                canvasCtx.lineTo(x, y);
+              var v = dataArray[i]; //Vale de 0 a 255
+              var value = map(v, 0, 255, 0, 100) /100;
+
+              for (var w = 0; w < _waves; w++) {
+                // 
+                if (value > _dampingAmplitude) _dampingAmplitude += (Math.min(value,1.0)-_dampingAmplitude)/4.0;
+                else if (value<0.01) _dampingAmplitude *= _dampingFactor;
+                // _phase += _phaseShift;
+                _phase += -sliceWidth;
+                _amplitude = Math.max( Math.min(_dampingAmplitude*20, 1.0), _idleAmplitude);
+                // 
+                var maxAmplitude = (HEIGHT/2) * _maxAmplitude - 4;
+                var progress = 1.0- w / _waves;
+                var normedAmplitude = (1.5 * progress - 0.5) * _amplitude;
+                var multiplier = Math.min(1.0, (progress / 3.0 * 2.0) + (1.0 / 3.0));
+
+                /*canvasCtx.strokeStyle = 'rgba(255, 255, 255, '+multiplier+')';*/
+
+                // 
+                var scaling = -Math.pow(1 / (WIDTH/2) * (x - (WIDTH/2)), 2) + 1;
+                var _y = scaling * maxAmplitude * normedAmplitude * Math.sin(2 *Math.PI *(x / WIDTH) * _frequency + _phase) + (HEIGHT/2);
+                // 
+
+                var y = (HEIGHT-HEIGHT/4) - v;
+                if(i === 0) {
+                  canvasCtx.moveTo(x, _y);
+                } else {
+                  canvasCtx.lineTo(x, _y);
+                }
+                x += sliceWidth;
               }
-              x += 3*sliceWidth;
             }
             canvasCtx.lineTo(WIDTH, HEIGHT/2);
             canvasCtx.stroke();
@@ -122,3 +155,6 @@ angular.module('wavesApp')
         }
       }
     }]);
+function map ( value, in_min , in_max , out_min , out_max ) {
+  return ( value - in_min ) * ( out_max - out_min ) / ( in_max - in_min ) + out_min;
+}

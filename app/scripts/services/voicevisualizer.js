@@ -92,7 +92,7 @@ angular.module('wavesApp')
         visualize: function (){
           WIDTH = canvas.width;
           HEIGHT = canvas.height;
-          analyser.fftSize = 2048;
+          analyser.fftSize = 512;
           var bufferLength = analyser.frequencyBinCount;
           // var bufferLength = analyser.fftSize;
 
@@ -100,8 +100,8 @@ angular.module('wavesApp')
 
           canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
 
-          function draw() {
-            drawVisual = requestAnimationFrame(draw);
+/*          function drawSin() {
+            drawVisual = requestAnimationFrame(drawSin);
             analyser.getByteFrequencyData(dataArray);
             // analyser.getByteTimeDomainData(dataArray);
 
@@ -131,7 +131,7 @@ angular.module('wavesApp')
                 var normedAmplitude = (1.5 * progress - 0.5) * _amplitude;
                 var multiplier = Math.min(1.0, (progress / 3.0 * 2.0) + (1.0 / 3.0));
 
-                /*canvasCtx.strokeStyle = 'rgba(255, 255, 255, '+multiplier+')';*/
+                //canvasCtx.strokeStyle = 'rgba(255, 255, 255, '+multiplier+')';
 
                 // 
                 var scaling = -Math.pow(1 / (WIDTH/2) * (x - (WIDTH/2)), 2) + 1;
@@ -150,8 +150,34 @@ angular.module('wavesApp')
             canvasCtx.lineTo(WIDTH, HEIGHT/2);
             canvasCtx.stroke();
           };
+          drawSin();*/
 
-          draw();
+          function drawSimple(){
+            drawVisual = requestAnimationFrame(drawSimple);
+            analyser.getByteTimeDomainData(dataArray);
+
+            canvasCtx.fillStyle = 'rgb(0, 0, 0)';
+            canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
+            canvasCtx.lineWidth = 2;
+            canvasCtx.strokeStyle = 'rgb(255, 255, 255)';
+            canvasCtx.beginPath();
+
+            var sliceWidth = WIDTH * 1.0 / bufferLength;
+            var x = 0;
+
+            for(var i = 0; i < bufferLength; i++) {
+              x = i * (sliceWidth + 1);
+              var y = dataArray[i]/256 * HEIGHT;
+              if(i === 0) {
+                canvasCtx.moveTo(x, y);
+              } else {
+                canvasCtx.lineTo(x, y);
+              }
+            } 
+            canvasCtx.lineTo(WIDTH, HEIGHT/2);
+            canvasCtx.stroke();
+          }
+          drawSimple();
         }
       }
     }]);

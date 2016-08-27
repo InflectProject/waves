@@ -14,15 +14,11 @@ angular.module('wavesApp')
                             $window.navigator.mozGetUserMedia ||
                             $window.navigator.msGetUserMedia);
   
-      // set up forked web audio context, for multiple browsers
-      // window. is needed otherwise Safari explodes
-  
       var audioCtx = new ($window.AudioContext || $window.webkitAudioContext)();
-      // var voiceSelect = document.getElementById("voice");
+      
       var source;
       var stream;
   
-      //set up the different audio nodes we will use for the app
       var analyser = audioCtx.createAnalyser();
       analyser.minDecibels = -90;
       analyser.maxDecibels = -10;
@@ -40,7 +36,7 @@ angular.module('wavesApp')
       
       var WIDTH;
       var HEIGHT;
-
+/*
       var _frequency = 1.5;
       var _phase = 0;
       var _amplitude = 1.0;
@@ -53,20 +49,20 @@ angular.module('wavesApp')
       var _phaseShift = -0.15;
       var _density = 5.0;
       var _maxAmplitude = 0.5;
-
+*/
 
       return {
         init: function( cnvs ){
-          // set up canvas context for visualizer
+          
           canvas = cnvs;
           canvasCtx = cnvs.getContext("2d");
           intendedWidth = document.querySelector('.visualizer-wrapper').clientWidth;
           canvas.setAttribute('width', intendedWidth);
           canvas.setAttribute('height', 400);
 
-          //main block for doing the audio recording
+          
           if ($window.navigator.getUserMedia) {
-            // console.log('getUserMedia supported.');
+            
             $window.navigator.getUserMedia ( 
               { audio: true },
               function(stream) {
@@ -163,11 +159,12 @@ angular.module('wavesApp')
             canvasCtx.beginPath();
 
             var sliceWidth = WIDTH * 1.0 / bufferLength;
-            var x = 0;
+            var x = 0, y;
 
             for(var i = 0; i < bufferLength; i++) {
               x = i * (sliceWidth + 1);
-              var y = dataArray[i]/256 * HEIGHT;
+              y = dataArray[i]/256 * HEIGHT;
+              
               if(i === 0) {
                 canvasCtx.moveTo(x, y);
               } else {
@@ -181,6 +178,6 @@ angular.module('wavesApp')
         }
       }
     }]);
-function map ( value, in_min , in_max , out_min , out_max ) {
+/*function map ( value, in_min , in_max , out_min , out_max ) {
   return ( value - in_min ) * ( out_max - out_min ) / ( in_max - in_min ) + out_min;
-}
+}*/

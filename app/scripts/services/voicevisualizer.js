@@ -148,6 +148,23 @@ angular.module('wavesApp')
           };
           drawSin();*/
 
+          function supercalifragilistic_function(x){
+            function E(x){
+              return 0.1 + Math.pow(Math.sin(x),2) + 0.35*Math.pow(Math.E, -0.5*Math.pow((x/0.4),2));
+            }
+            function H(x){
+              return Math.cos(21*x)
+            }
+            function G(x){
+              return Math.pow(Math.E, (-0.5*Math.pow(((x-0.15)/0.10), 2)));
+            }
+            return E(x)*H(x)*(1-(0.5*G(x)))+((1/6)*G(x));
+          }
+          
+          function basic_function(x){
+            return Math.sin(x/256)*Math.sin(20*x/256);
+          }
+
           function drawSimple(){
             drawVisual = requestAnimationFrame(drawSimple);
             analyser.getByteTimeDomainData(dataArray);
@@ -163,8 +180,10 @@ angular.module('wavesApp')
 
             for(var i = 0; i < bufferLength; i++) {
               x = i * (sliceWidth + 1);
-              y = dataArray[i]/256 * HEIGHT;
-              
+              // y = dataArray[i]/256 * HEIGHT;                                 //Meh, stupidly ugly.
+              y = basic_function(dataArray[i])*(HEIGHT/6)+(HEIGHT/2);
+              // y = dataArray[i]*basic_function(x)+(HEIGHT/2);                 //Became amazing.
+              // y = dataArray[i]*supercalifragilistic_function(x)+(HEIGHT/2);    //So near to the real amazing sine wave form! 
               if(i === 0) {
                 canvasCtx.moveTo(x, y);
               } else {

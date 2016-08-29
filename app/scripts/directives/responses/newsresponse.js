@@ -12,6 +12,6 @@ angular.module('wavesApp')
       templateUrl: 'views/directives/responses/news.html',
       replace: true,
       restrict: 'E',
-      controller: 'NewsCtrl'
+      controller: 'NewsResponseCtrl'
     };
   });

@@ -50,96 +50,105 @@ angular
           }
         }
       })
-      .state('talk', {
-        url: '/talk',
+      .state('talking', {
+        url: '/talking',
+        params: { result: null },
         views: {
           'content': {             
-            'template': '<voice-wave/>' 
+            'template': '<speech-visualizer/>' 
           }
         }
       })
-      .state('waiting_response', {
-        url: '/waiting_response',
+      .state('loading', {
+        url: '/loading',
+        params: { text: null },
         views: {
           'content': { 
-            'template': '<loading/>' 
+            'template': '<loading/>'
           }
         }
       })
-      .state('news', {
+      .state('noticias', {
         url: '/news',
+        params: { response: null },
         views: {
           'content': {
             'template': '<news-response/>'
           }
         }
       })
-      .state('events', {
+      .state('clima', {
+        url: '/weather',
+        params: { response: null },
+        views: {
+          'content': {
+            'template': '<weather-response/>'
+          }
+        }
+      })    
+    /* 
+    .state('eventos', {
         url: '/events',
         views: {
           'content': {
             'template': '<events-response/>'
           }
         }
-      })      
-      .state('weather', {
-        url: '/weather',
+      })
+      .state('feriado', {
+        url: '/next-holliday',
         views: {
           'content': {
-            'template': '<weather-response/>'
+            'template': '<next-holliday-response/>'
           }
         }
-      });
+      })
+    .state('farmacias', {
+        url: '/pharmacies',
+        views: {
+          'content': {
+            'template': '<pharmacies-response/>'
+          }
+        }
+      })*/
+      ;
   });
 
  angular
-  .module('wavesApp').run(['$rootScope', 'speechSynthesis', 'speechRecognition', '$state', '$timeout', function($rootScope, speechSynthesis, speechRecognition, $state, $timeout){
+  .module('wavesApp').run(['$rootScope', 'speechSynthesis', 'speechRecognition', '$state', '$timeout', '$interval', 'InflectionsAPIService', 'responseRedirector',
+    function($rootScope, speechSynthesis, speechRecognition, $state, $timeout, $interval, InflectionsAPIService, ResponseRedirectorService){
+      var speechRecognizer;
       $rootScope.speechResult={};
-      $rootScope.speechWasEnded=false;
 
+/*      function speechResultTransformer(result){
+        var r = speechRecognizer.reduceResult(result)
+        var extractedSvcKey = $rootScope.initialData.grammars.keys.difference(r.text.split(" "))
+        if(extractedSvcKey){
+          var params_actions=$rootScope.initialData.grammars[extractedSvcKey].difference(r.text.split(" "))
+        }
+      }*/
+      
       try{
-        $rootScope.speechRecognition = speechRecognition.init({ lang: 'es-AR' }, 
-        {
-          onspeechstart: function(e){
-            $rootScope.speechResult={};
-            $state.go('talk');
-            $rootScope.$emit('speechstart');
-          },
-          onresult: function onResult(complete_result){
-            var result = $rootScope.speechRecognition.filterResult(complete_result);
+        speechRecognizer = speechRecognition.init( 
+          { 
+            lang: 'es-AR', 
+            continuous: true 
+          }, 
+          {
+            onerror: function (e){
+              $rootScope.speechResult.noSpeech=(e.error==='no-speech');
+            },
+            onresult: function (complete_result){
+              // speechSynthesis.say(result.text, {lang:'es-AR'});  
 
-            $rootScope.speechResult.isInterim = !result.final;
-            $rootScope.speechResult.result = result.text;
-
-            if(result.final){
-              speechSynthesis.say(result.text, {lang:'es-AR'});
-              $rootScope.speechRecognition.stop();
-              $rootScope.speechResult.stopSpeech=true;
-
-              $timeout(function() { 
-                $state.go('waiting_response');
-              }, 1000);
+              //speechResultTransformer(complete_result)
+              $state.go('talking', {result: speechRecognizer.reduceResult(complete_result)});
             }
-          },
-          onend: function onEnd(e){
-            if($rootScope.speechWasEnded){
-              $state.go('active_screen');
-              $rootScope.speechWasEnded=false;
-            }
+          });
 
-            $rootScope.speechRecognition.stop();
-            if(!$rootScope.speechResult.stopSpeech){
-              $rootScope.speechRecognition.start();
-              $rootScope.speechWasEnded=!$rootScope.speechWasEnded;
-            }
-          },
-          onerror: function onError(e){
-            $rootScope.speechResult.noSpeech=(e.error==='no-speech');
-          }
-        });
+        speechRecognizer.start();
 
-        $rootScope.speechRecognition.start();
-        
+        $rootScope.speechRecognition=speechRecognizer;
       }catch(e){
         $rootScope.speechResult.result = e.message;
         $rootScope.speechResult.speechRecognitionNotSupported=true;

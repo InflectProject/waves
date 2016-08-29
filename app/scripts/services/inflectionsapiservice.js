@@ -9,20 +9,20 @@
  */
 angular.module('wavesApp')
   .service('InflectionsAPIService', ['$http', function ($http) {
-      // AngularJS will instantiate a singleton by calling "new" on this function
       return {
-        getInitialData: function(key, limit){
+        fetchStartupData: function(key, limit){
           return $http({
             method: 'POST',
-            url:'/', 
+            url: '/', 
             data: {key: key, limit: limit}
           });
         },
+        
         sendRecognition: function(words){
           return $http({
             method: 'POST',
-            url:'/', 
-            data: words
+            url: '/inflect', 
+            data: "words[]="+JSON.stringify(words)
           });
         }
       };

@@ -7,10 +7,11 @@
  * # voiceWave
  */
 angular.module('wavesApp')
-  .directive('voiceWave', function () {
+  .directive('speechVisualizer', function () {
     return {
-      templateUrl: 'views/directives/voice_wave.html',
+      templateUrl: 'views/directives/speech_visualizer.html',
       replace: true,
-      restrict: 'E'
+      restrict: 'E',
+      controller: 'SpeechVisualizerCtrl'
     };
   });

@@ -31,6 +31,7 @@ angular.module('wavesApp')
           throw(new SpeechRecognitionException('Unable to initialize SpeechRecognizer. HTML5 SpeechRecognition not supported on your browser. '));
         }
       }, 
+
       start: function() {
         if(recognizer){
           recognizer.start();
@@ -40,6 +41,7 @@ angular.module('wavesApp')
           throw(new SpeechRecognitionException('Unable to start recognizer. Initialize the recognizer first!'));
         }
       },
+
       stop: function() {
         if(recognizer){
           recognizer.stop();
@@ -49,12 +51,15 @@ angular.module('wavesApp')
           throw(new SpeechRecognitionException('Unable to start recognizer. Initialize the recognizer first!'));
         }
       },
+
       isStarted: function(){
         return recognizer._started;
       },
+
       isStopped: function(){
         return !recognizer._started;
       },
+
       abort: function() {
         if(recognizer){
           recognizer.abort();
@@ -64,7 +69,8 @@ angular.module('wavesApp')
           throw(new SpeechRecognitionException('Unable to start recognizer. Initialize the recognizer first!'));
         }
       }, 
-      filterResult: function(result){	
+      
+      reduceResult: function(result){	
         if (!result || !result.results) {
           return;
         }

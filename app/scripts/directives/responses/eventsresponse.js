@@ -12,6 +12,6 @@ angular.module('wavesApp')
       templateUrl: 'views/directives/responses/events.html',
       replace: true,
       restrict: 'E',
-      controller: 'EventsCtrl'
+      controller: 'ListResponseCtrl'
     };
   });

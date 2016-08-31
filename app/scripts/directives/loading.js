@@ -12,6 +12,6 @@ angular.module('wavesApp')
       templateUrl: 'views/directives/loading.html',
       replace:true,
       restrict: 'E',
-      controller: 'TalkCtrl'
+      controller: 'LoadingCtrl'
     };
   });

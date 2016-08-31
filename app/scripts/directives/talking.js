@@ -7,10 +7,11 @@
  * # voiceWave
  */
 angular.module('wavesApp')
-  .directive('voiceWave', function () {
+  .directive('talking', function () {
     return {
-      templateUrl: 'views/directives/voice_wave.html',
+      templateUrl: 'views/directives/talking.html',
       replace: true,
-      restrict: 'E'
+      restrict: 'E',
+      controller: 'TalkingCtrl'
     };
   });

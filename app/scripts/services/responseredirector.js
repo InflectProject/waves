@@ -9,10 +9,18 @@
  */
 angular.module('wavesApp')
   .service('responseRedirector', ['$state', function ($state) {
-      return {
-        redirect: function(response){
-          response = JSON.parse(response);
-          $state.go(response.attributes.query_words.toLowerCase(), response.content);
+    function noServiceFound(response){
+      return response.status === 'not_found';
+    }
+
+    return {
+      redirect: function(response){
+        response = JSON.parse(response);
+        if(noServiceFound(response)){
+          $state.go(response.attributes.query_words[0].toLowerCase(), response);
+        }else{
+          $state.go('not_found', response);
         }
-      };
-    }]);
+      }
+    };
+  }]);

@@ -52,10 +52,13 @@ angular
       })
       .state('talking', {
         url: '/talking',
-        params: { result: null },
+        params: { 
+          result: null, 
+          speechRecognitionNotSupported: false 
+        },
         views: {
           'content': {             
-            'template': '<speech-visualizer/>' 
+            'template': '<talking/>' 
           }
         }
       })
@@ -85,10 +88,20 @@ angular
             'template': '<weather-response/>'
           }
         }
-      })    
+      })
+      .state('not_found', {
+        url: '/not_found',
+        params: { response: null },
+        views: {
+          'content': {
+            'template': '<not-found-response/>'
+          }
+        }
+      })
     /* 
     .state('eventos', {
         url: '/events',
+        params: { response: null },
         views: {
           'content': {
             'template': '<events-response/>'
@@ -97,6 +110,7 @@ angular
       })
       .state('feriado', {
         url: '/next-holliday',
+        params: { response: null },
         views: {
           'content': {
             'template': '<next-holliday-response/>'
@@ -105,6 +119,7 @@ angular
       })
     .state('farmacias', {
         url: '/pharmacies',
+        params: { response: null },
         views: {
           'content': {
             'template': '<pharmacies-response/>'
@@ -120,14 +135,15 @@ angular
       var speechRecognizer;
       $rootScope.speechResult={};
 
-/*      function speechResultTransformer(result){
+/*    TODO:: Create a decorator!  
+      function speechResultTransformer(result){
         var r = speechRecognizer.reduceResult(result)
         var extractedSvcKey = $rootScope.initialData.grammars.keys.difference(r.text.split(" "))
         if(extractedSvcKey){
           var params_actions=$rootScope.initialData.grammars[extractedSvcKey].difference(r.text.split(" "))
         }
       }*/
-      
+
       try{
         speechRecognizer = speechRecognition.init( 
           { 
@@ -141,7 +157,7 @@ angular
             onresult: function (complete_result){
               // speechSynthesis.say(result.text, {lang:'es-AR'});  
 
-              //speechResultTransformer(complete_result)
+              //result = speechResultTransformer(complete_result)
               $state.go('talking', {result: speechRecognizer.reduceResult(complete_result)});
             }
           });
@@ -150,15 +166,15 @@ angular
 
         $rootScope.speechRecognition=speechRecognizer;
       }catch(e){
-        $rootScope.speechResult.result = e.message;
-        $rootScope.speechResult.speechRecognitionNotSupported=true;
+        //TODO:: Move message to active_screen as thin navbar
+        $state.go('talking', {result: e.message, speechRecognitionNotSupported: true});
       }
 
       
       $rootScope.$on('$stateChangeStart', function(ev, next, nextParams, from, fromParams){
         if((from.name != next.name) && (next.name == "active_screen") && ($rootScope.speechRecognition) && ($rootScope.speechRecognition.isStopped())){
           try{
-            $rootScope.speechRecognition.start();
+            $rootScope.speechRecognition && $rootScope.speechRecognition.start();
           }catch(e){
             console.warn(e);
           }

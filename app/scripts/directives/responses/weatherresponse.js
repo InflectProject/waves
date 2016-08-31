@@ -12,6 +12,6 @@ angular.module('wavesApp')
       templateUrl: 'views/directives/responses/weather.html',
       replace: true,
       restrict: 'E',
-      controller: 'WeatherResponseCtrl'
+      controller: 'ListResponseCtrl'
     };
   });

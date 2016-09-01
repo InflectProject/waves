@@ -10,9 +10,11 @@
 angular.module('wavesApp')
   .controller('CommunicatorCtrl', ['$scope', function ($scope) {
       $scope.validActions = [
-        {name:'Eventos', state: 'events'},
-        {name:'Clima', state: 'weather'},
-        {name:'Noticias',state: 'news'},
-        {name:'Voz', state: 'talk'}
+        {name:'Eventos'},
+        {name:'Clima'},
+        {name:'Feriado'},
+        {name:'Farmacias'},
+        {name:'Noticias'},
+        // {name:'Voz'}
       ];
     }]);

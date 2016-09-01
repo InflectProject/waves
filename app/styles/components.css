@@ -60,7 +60,7 @@
   font-family: "HelveticaNeue-UltraLight";
 }
 
-.communicator{ position:absolute; right:0px; }
+.communicator{ position:absolute; right:0px; z-index: 10000; }
 
 
 
@@ -80,7 +80,7 @@
 }
 
 
-.talk .fa-microphone {
+.talk .fa-microphone, .talk .fa-microphone-slash {
   border-radius: 50px;
   border: 1px solid white;
   width: 75px; 
@@ -102,6 +102,6 @@
 .talk.notSupported .talk-result {
   color: #900!important;
 }
-.talk.notSupported .fa-microphone {
+.talk.notSupported .fa-microphone-slash {
   border-color: #900!important;
 }

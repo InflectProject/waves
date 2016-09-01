@@ -8,7 +8,7 @@
  * Controller of the wavesApp
  */
 angular.module('wavesApp')
-  .controller('ListResponseCtrl', ['$stateParams', function ($stateParams) {
+  .controller('ListResponseCtrl', ['$scope', '$stateParams', function ($scope, $stateParams) {
       $scope.content = {
         body: $stateParams.content.body, 
         title: $stateParams.content.title

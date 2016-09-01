@@ -59,6 +59,8 @@ body {
   -ms-user-select: none;       /* Internet Explorer/Edge */
   user-select: none;           /* Non-prefixed version, currently
                                   not supported by any browser */
+
+  cursor:default!important;
 }
 
 .fa-twitter, .fa-microphone, .fa-microphone-slash {

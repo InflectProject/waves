@@ -9,17 +9,17 @@
  */
 angular.module('wavesApp')
   .service('responseRedirector', ['$state', function ($state) {
-    function noServiceFound(response){
-      return response.attributes.status == 'not_found';
+    function noServiceFound(status){
+      return status == 'not_found';
     }
 
     return {
       redirect: function(response){
         response = response.data;
-        if(noServiceFound(response)){
-          $state.go(response.attributes.query_words[0].toLowerCase(), response);
+        if(noServiceFound(response.attributes.status)){
+          $state.go('not_found', {response: response});
         }else{
-          $state.go('not_found', response);
+          $state.go(response.attributes.query_words[0].toLowerCase(), response);
         }
       }
     };

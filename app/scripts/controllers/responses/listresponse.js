@@ -8,9 +8,13 @@
  * Controller of the wavesApp
  */
 angular.module('wavesApp')
-  .controller('ListResponseCtrl', ['$scope', '$stateParams', function ($scope, $stateParams) {
-      $scope.content = {
-        body: $stateParams.content.body, 
-        title: $stateParams.content.title
+  .controller('ListResponseCtrl', ['$scope', '$state', '$stateParams', function ($scope, $state, $stateParams) {
+    if($stateParams.response){
+      $scope.response = {
+        body: $stateParams.response.content.body, 
+        title: $stateParams.response.content.title
       };
+    }else{
+      $state.go('active_screen')
+    }
     }]);

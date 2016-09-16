@@ -10,12 +10,12 @@
 angular.module('wavesApp')
   .service('responseRedirector', ['$state', function ($state) {
     function noServiceFound(response){
-      return response.status === 'not_found';
+      return response.attributes.status == 'not_found';
     }
 
     return {
       redirect: function(response){
-        response = JSON.parse(response);
+        response = response.data;
         if(noServiceFound(response)){
           $state.go(response.attributes.query_words[0].toLowerCase(), response);
         }else{

@@ -12,7 +12,7 @@ angular.module('wavesApp')
     if($stateParams.response){
       $scope.response = $stateParams.response.content;
     // speechSynthesis.say($scope.response, {lang:'es-AR'});
-    }/*else{
+    }else{
       $state.go('active_screen')
-    }*/
+    }
   }]);

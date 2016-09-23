@@ -14,7 +14,7 @@ angular.module('wavesApp')
         body: $stateParams.response.content.body, 
         title: $stateParams.response.content.title
       };
-    }/*else{
+    }else{
       $state.go('active_screen')
-    }*/
+    }
     }]);

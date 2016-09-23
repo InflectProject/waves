@@ -8,8 +8,8 @@
  * Controller of the wavesApp
  */
 angular.module('wavesApp')
-  .controller('BootCtrl', ['$rootScope', '$timeout', '$state', '$window', 'InflectionsAPIService', 
-    function ($rootScope, $timeout, $state, $window, InflectionsAPIService) {
+  .controller('BootCtrl', ['$scope', '$timeout', '$state', '$window', 'InflectionsAPIService', 
+    function ($scope, $timeout, $state, $window, InflectionsAPIService) {
       function onLoad(){
         var initialData = {};
         

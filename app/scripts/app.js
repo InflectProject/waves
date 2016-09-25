@@ -71,8 +71,17 @@ angular
           }
         }
       })
+      .state('not_found', {
+        url: '/not_found',
+        params: { response: null },
+        views: {
+          'content': {
+            'template': '<not-found-response/>'
+          }
+        }
+      })
       .state('noticias', {
-        url: '/news',
+        url: '/noticias',
         params: { response: null },
         views: {
           'content': {
@@ -81,20 +90,11 @@ angular
         }
       })
       .state('clima', {
-        url: '/weather',
+        url: '/clima',
         params: { response: null },
         views: {
           'content': {
             'template': '<weather-response/>'
-          }
-        }
-      })
-      .state('not_found', {
-        url: '/not_found',
-        params: { response: null },
-        views: {
-          'content': {
-            'template': '<not-found-response/>'
           }
         }
       })

@@ -19,7 +19,7 @@ angular.module('wavesApp')
         if(noServiceFound(response.attributes.status)){
           $state.go('not_found', {response: response});
         }else{
-          $state.go(response.attributes.query_words[0].toLowerCase(), response);
+          $state.go(response.attributes.query_words[0].toLowerCase(), {response: response});
         }
       }
     };

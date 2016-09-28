@@ -71,8 +71,17 @@ angular
           }
         }
       })
+      .state('not_found', {
+        url: '/not_found',
+        params: { response: null },
+        views: {
+          'content': {
+            'template': '<not-found-response/>'
+          }
+        }
+      })
       .state('noticias', {
-        url: '/news',
+        url: '/noticias',
         params: { response: null },
         views: {
           'content': {
@@ -81,20 +90,11 @@ angular
         }
       })
       .state('clima', {
-        url: '/weather',
+        url: '/clima',
         params: { response: null },
         views: {
           'content': {
             'template': '<weather-response/>'
-          }
-        }
-      })
-      .state('not_found', {
-        url: '/not_found',
-        params: { response: null },
-        views: {
-          'content': {
-            'template': '<not-found-response/>'
           }
         }
       })
@@ -151,23 +151,21 @@ angular
             continuous: true 
           }, 
           {
-            onerror: function (e){
-              $rootScope.speechResult.noSpeech=(e.error==='no-speech');
+            onfirstresult: function(){
+              $state.go('talking');
             },
-            onresult: function (complete_result){
-              // speechSynthesis.say(result.text, {lang:'es-AR'});  
-
-              //result = speechResultTransformer(complete_result)
-              $state.go('talking', {result: speechRecognizer.reduceResult(complete_result)});
+            onresult: function(result){
+              $rootScope.$emit("onresult", result);
             }
-          });
-
+          }
+        );
+        
         speechRecognizer.start();
 
         $rootScope.speechRecognition=speechRecognizer;
       }catch(e){
         //TODO:: Move message to active_screen as thin navbar
-        $state.go('talking', {result: e.message, speechRecognitionNotSupported: true});
+        console.warn({result: e.message, speechRecognitionNotSupported: true});
       }
 
       

@@ -8,20 +8,21 @@
  * Service in the wavesApp.
  */
 angular.module('wavesApp')
-  .service('InflectionsAPIService', ['$http', function ($http) {
+  .service('InflectionsAPIService', ['$http', '$q', 'HOST',  function ($http, $q, HOST) {
       return {
-        fetchStartupData: function(key, limit){
-          return $http({
-            method: 'POST',
-            url: '/', 
-            data: {key: key, limit: limit}
-          });
+        fetchStartupData: function(wordsArray){
+          var self=this;
+          return $q.all(
+            wordsArray.map(function(word){
+              return self.sendRecognition(word);
+            })
+          );
         },
         
         sendRecognition: function(words){
           return $http({
             method: 'POST',
-            url: '/inflect', 
+            url: HOST+'/inflect', 
             transformRequest: function(obj) {
               var str = [];
               for(var p in obj)

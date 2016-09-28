@@ -8,12 +8,18 @@
  * Controller of the wavesApp
  */
 angular.module('wavesApp')
-  .controller('HollidaysCtrl', ['$scope', function ($scope) {
+  .controller('HollidaysCtrl', ['$rootScope', '$scope', 'hollidaysWord', function ($rootScope, $scope, hollidaysWord) {
+      var hollidaysData=$rootScope.startupData.filter(function(data){
+         return data.word==hollidaysWord;
+        }).shift();
+
       $scope.hollidays = [
-        { desc: 'Feriado 1', days: 5},
-        { desc: 'Feriado 2', days: 4},
-        { desc: 'Feriado 3', days: 3},
-        { desc: 'Feriado 4', days: 2},
-        { desc: 'Feriado 5', days: 1},
+        { 
+          desc: hollidaysData.body.motivo, 
+          inDays: moment( moment().format('YYYY') + '-' + 
+                        hollidaysData.body.mes + '-' + 
+                        hollidaysData.body.dia)
+                .fromNow()
+        },
       ];
     }]);

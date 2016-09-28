@@ -8,28 +8,19 @@
  * Controller of the wavesApp
  */
 angular.module('wavesApp')
-  .controller('BootCtrl', ['$rootScope', '$timeout', '$state', '$window', 'InflectionsAPIService', 
-    function ($rootScope, $timeout, $state, $window, InflectionsAPIService) {
-      function onLoad(){
-        var initialData = {};
-        
-        InflectionsAPIService.fetchStartupData({
-          hollidays: 5,
-          forecast: 5,  //A los iconos que llegan hay que borrar el substring forecast-io
-                        //https://erikflowers.github.io/weather-icons/api-list.html
-          news:10,
-          grammars: '*' //{k*: v} => k: palabras reconocidas, v: parametros/acciones validas
-        }).then(function(result){
-          initialData=result.data;
+  .controller('BootCtrl', ['$rootScope', '$state', 'InflectionsAPIService', 'hollidaysWord',  'weatherWord', 'newsWord', 
+    function ($rootScope, $state, InflectionsAPIService, hollidaysWord, weatherWord, newsWord) {
+      //Palabras :: {k*: v} => k: palabras reconocidas, v: parametros/acciones validas
 
-          // $rootScope.initialData=initialData;
-          // $state.go('active_screen');
+      InflectionsAPIService.fetchStartupData([hollidaysWord, weatherWord, newsWord])
+        .then(function(results){
+          var startupData = results.map(function(result){
+            return { 
+              word: result.data.attributes.query_words[0], 
+              body: result.data.content.body 
+            };
+          });
+          $rootScope.startupData=startupData;
+          $state.go('active_screen');
         });
-  
-        $rootScope.initialData=initialData;
-        $state.go('active_screen'); 
-      }
-  
-      // angular.element($window).bind('load', $scope.onLoad);
-      $timeout(onLoad, 2000);
     }]);

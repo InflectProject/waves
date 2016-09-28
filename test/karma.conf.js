@@ -34,6 +34,7 @@ module.exports = function(config) {
       'bower_components/angular-capitalize-filter/capitalize.js',
       'bower_components/holderjs/holder.js',
       'bower_components/angular-holderjs/src/holder.js',
+      'bower_components/moment/moment.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

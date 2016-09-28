@@ -9,7 +9,7 @@
  */
 angular.module('wavesApp')
   .controller('WeatherCtrl', ['$rootScope', '$scope', 'weatherWord', function ($rootScope, $scope, weatherWord) {
-      //Clima :: A los iconos que llegan hay que borrar el substring forecast-io
+      //Clima :: Iconos que llegan
       //         https://erikflowers.github.io/weather-icons/api-list.html
 
       var weatherData=$rootScope.startupData.filter(function(data){
@@ -24,4 +24,5 @@ angular.module('wavesApp')
           icon: day.icon
         }
       }).slice(0,5);
+
     }]);

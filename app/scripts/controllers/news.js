@@ -8,27 +8,20 @@
  * Controller of the wavesApp
  */
 angular.module('wavesApp')
-  .controller('NewsCtrl', ['$scope', '$interval', '$timeout', function ($scope, $interval, $timeout) {
-      $scope.pageSize = 10;
+  .controller('NewsCtrl', ['$rootScope', '$scope', '$interval', '$timeout', 'newsWord', 
+    function ($rootScope, $scope, $interval, $timeout, newsWord) {
+      var newsData=$rootScope.startupData.filter(function(data){
+       return data.word == newsWord;
+      }).shift();
+      
+      $scope.pageSize = newsData.body.length;
   
       $scope.news={
-        latest: [
-          'Noticia1Noticia1Noticia1Noticia1Noticia1Noticia1Noticia1Noticia1Noticia1',
-          'Noticia2Noticia2Noticia2Noticia2Noticia2Noticia2Noticia2Noticia2Noticia2',
-          'Noticia3Noticia3Noticia3Noticia3Noticia3Noticia3Noticia3Noticia3Noticia3',
-          'Noticia4Noticia4Noticia4Noticia4Noticia4Noticia4Noticia4Noticia4Noticia4',
-          'Noticia5Noticia5Noticia5Noticia5Noticia5Noticia5Noticia5Noticia5Noticia5',
-          'Noticia6Noticia6Noticia6Noticia6Noticia6Noticia6Noticia6Noticia6Noticia6',
-          'Noticia7Noticia7Noticia7Noticia7Noticia7Noticia7Noticia7Noticia7Noticia7',
-          'Noticia8Noticia8Noticia8Noticia8Noticia8Noticia8Noticia8Noticia8Noticia8',
-          'Noticia9Noticia9Noticia9Noticia9Noticia9Noticia9Noticia9Noticia9Noticia9',
-          'Noticia10Noticia10Noticia10Noticia10Noticia10Noticia10Noticia10Noticia10',
-        ], 
+        latest: newsData.body, 
         current: "",
         currentIndex: 0,
         show: true
       };
-  
   
       $interval(function(){
         $scope.news.show = false;

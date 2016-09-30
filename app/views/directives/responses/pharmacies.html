@@ -1,13 +1,13 @@
-<div class="col-md-offset-2 col-md-8 events-response" ng-if="response">
+<div class="col-md-offset-2 col-md-8 pharmacies-response" ng-if="response">
   <ul class="events-list list-group text-center">
-    <li ng-repeat="event in events" class="list-group-item">
+    <li ng-repeat="pharmacy in pharmacies" class="list-group-item">
       <div class="media">
         <!-- <div class="media-left">
           <img class="media-object" holder="holder.js/64x64">
         </div> -->
         <div class="media-body">
-          <h4 class="media-heading"><strong>{{event.name}}</strong></h4>
-          <small> <em> {{event.address}} </em> </small>
+          <h4 class="media-heading"><strong>{{pharmacy.name}}</strong></h4>
+          <small> <em> {{pharmacy.address}} </em> </small>
         </div>
       </div>
     </li>

@@ -13,6 +13,6 @@ angular.module('wavesApp')
       $scope.response = $stateParams.response.content;
       speechSynthesis.say($scope.response, {lang:'es-AR'});
     }else{
-      $state.go('active_screen')
+      $state.go('boot')
     }
   }]);

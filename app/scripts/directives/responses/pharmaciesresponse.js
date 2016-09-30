@@ -2,20 +2,20 @@
 
 /**
  * @ngdoc directive
- * @name wavesApp.directive:newsResponse
+ * @name wavesApp.directive:pharmaciesResponse
  * @description
- * # newsResponse
+ * # pharmaciesResponse
  */
 angular.module('wavesApp')
-  .directive('newsResponse', function () {
+  .directive('pharmaciesResponse', function () {
     return {
-      templateUrl: 'views/directives/responses/news.html',
+      templateUrl: 'views/directives/responses/pharmacies.html',
       replace: true,
       restrict: 'E',
       controller: ['$scope', '$controller', 'weatherHelper', function ($scope, $controller, weatherHelper) {
         $controller('ListResponseCtrl', {$scope: $scope});
-        var news=$scope.response.body;
-        $scope.latest=news.slice(0,10);
+
+        $scope.pharmacies=$scope.response.body.slice(0, 7);
       }]
     };
   });

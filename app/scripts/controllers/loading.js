@@ -13,6 +13,6 @@ angular.module('wavesApp')
       if($stateParams.text){
         InflectionsAPIService.sendRecognition($stateParams.text).then(ResponseRedirectorService.redirect);
       }else{
-        $state.go('active_screen');
+        $state.go('boot');
       }
     }]);

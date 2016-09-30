@@ -15,6 +15,6 @@ angular.module('wavesApp')
         title: $stateParams.response.content.title
       };
     }else{
-      $state.go('active_screen')
+      $state.go('boot')
     }
-    }]);
+  }]);

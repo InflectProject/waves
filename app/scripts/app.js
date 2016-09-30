@@ -19,16 +19,17 @@ angular
     'ngTouch',
     'ui.router',
     'puigcerber.capitalize',
-    'ngHolder'
+    'ngHolder',
+    'pascalprecht.translate'
   ])
   .config(function ($stateProvider, $routeProvider) {
     $routeProvider
       .otherwise({
-        redirectTo: '/active_screen'
+        redirectTo: '/'
       });
 
     $stateProvider
-      .state('home', { 
+      .state('boot', { 
         url: '/',
         views: {
           'content': { 
@@ -98,6 +99,15 @@ angular
           }
         }
       })
+      .state('farmacias', {
+        url: '/farmacias',
+        params: { response: null },
+        views: {
+          'content': {
+            'template': '<pharmacies-response/>'
+          }
+        }
+      })
     /* 
     .state('eventos', {
         url: '/events',
@@ -114,15 +124,6 @@ angular
         views: {
           'content': {
             'template': '<next-holliday-response/>'
-          }
-        }
-      })
-    .state('farmacias', {
-        url: '/pharmacies',
-        params: { response: null },
-        views: {
-          'content': {
-            'template': '<pharmacies-response/>'
           }
         }
       })*/

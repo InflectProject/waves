@@ -1,13 +1,13 @@
 <div class="col-md-offset-2 col-md-8 news-response" ng-if="response">
   <ul class="news-list list-group text-center">
-    <li ng-repeat="notice in news.latest" class="list-group-item">
+    <li ng-repeat="notice in latest track by $index" class="list-group-item">
       <div class="media">
         <div class="media-left">
-          <img class="media-object" holder="holder.js/64x64">
+          <img class="media-object" holder="holder.js/32x32">
         </div>
         <div class="media-body">
           <h4 class="media-heading"><strong>{{notice}}</strong> <i class="fa fa-twitter"></i></h4>
-          <small> <em> Texto adicional de menor importancia </em> </small>
+          <!-- <small> <em> Texto adicional de menor importancia </em> </small> -->
         </div>
       </div>
     </li>

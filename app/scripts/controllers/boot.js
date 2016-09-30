@@ -20,6 +20,7 @@ angular.module('wavesApp')
               body: result.data.content.body 
             };
           });
+          
           $rootScope.startupData=startupData;
           $state.go('active_screen');
         });

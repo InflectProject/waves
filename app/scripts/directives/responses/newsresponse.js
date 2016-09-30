@@ -12,6 +12,10 @@ angular.module('wavesApp')
       templateUrl: 'views/directives/responses/news.html',
       replace: true,
       restrict: 'E',
-      controller: 'ListResponseCtrl'
+      controller: ['$scope', '$controller', 'weatherHelper', function ($scope, $controller, weatherHelper) {
+        $controller('ListResponseCtrl', {$scope: $scope});
+        var news=$scope.response.body;
+        $scope.latest=news.slice(0,10);
+      }]
     };
   });

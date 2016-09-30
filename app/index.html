@@ -67,13 +67,16 @@
     <script src="bower_components/holderjs/holder.js"></script>
     <script src="bower_components/angular-holderjs/src/holder.js"></script>
     <script src="bower_components/moment/moment.js"></script>
-    <script src="bower_components/moment/locale/es.js"></script>
+    <script src="bower_components/angular-translate/angular-translate.js"></script>
     <!-- endbower -->
+    <script src="bower_components/moment/locale/es.js"></script>
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
+
         <script src="scripts/app.js"></script>
         <script src="scripts/i18n/angular-locale_es-ar.js"></script>
+        <script src="scripts/i18n/translations.js"></script>
         <script src="scripts/services/speechsynthesis.js"></script>
         <script src="scripts/services/voicevisualizer.js"></script>
         <script src="scripts/services/speechrecognition.js"></script>
@@ -86,6 +89,8 @@
         <script src="scripts/directives/communicator.js"></script>
         <script src="scripts/directives/newsbar.js"></script>
         <script src="scripts/directives/hollidaydetail.js"></script>
+        <script src="scripts/controllers/responses/simpleresponse.js"></script>
+        <script src="scripts/controllers/responses/listresponse.js"></script>
         <script src="scripts/directives/responses/newsresponse.js"></script>
         <script src="scripts/directives/responses/eventsresponse.js"></script>
         <script src="scripts/directives/responses/weatherresponse.js"></script>
@@ -101,12 +106,11 @@
         <script src="scripts/controllers/talking.js"></script>
         <script src="scripts/services/responseredirector.js"></script>
         <script src="scripts/controllers/loading.js"></script>
-        <script src="scripts/controllers/responses/simpleresponse.js"></script>
-        <script src="scripts/controllers/responses/listresponse.js"></script>
         <script src="scripts/services/host.js"></script>
         <script src="scripts/services/hollidaysword.js"></script>
         <script src="scripts/services/weatherword.js"></script>
         <script src="scripts/services/newsword.js"></script>
+        <script src="scripts/services/weatherhelper.js"></script>
         <!-- endbuild -->
 </body>
 </html>

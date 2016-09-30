@@ -19,16 +19,17 @@ angular
     'ngTouch',
     'ui.router',
     'puigcerber.capitalize',
-    'ngHolder'
+    'ngHolder',
+    'pascalprecht.translate'
   ])
   .config(function ($stateProvider, $routeProvider) {
     $routeProvider
       .otherwise({
-        redirectTo: '/active_screen'
+        redirectTo: '/'
       });
 
     $stateProvider
-      .state('home', { 
+      .state('boot', { 
         url: '/',
         views: {
           'content': { 

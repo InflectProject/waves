@@ -8,7 +8,7 @@
  * Controller of the wavesApp
  */
 angular.module('wavesApp')
-  .controller('WeatherCtrl', ['$rootScope', '$scope', 'weatherWord', function ($rootScope, $scope, weatherWord) {
+  .controller('WeatherCtrl', ['$rootScope', '$scope', 'weatherHelper', 'weatherWord', function ($rootScope, $scope, weatherHelper, weatherWord) {
       //Clima :: Iconos que llegan
       //         https://erikflowers.github.io/weather-icons/api-list.html
 
@@ -16,13 +16,5 @@ angular.module('wavesApp')
        return data.word == weatherWord;
       }).shift();
 
-      $scope.forecast = weatherData.body.daily.data.map(function(day){
-        return {
-          day: moment.unix(day.time).format('ddd'),
-          min: Math.floor(day.temperatureMin),
-          max: Math.ceil(day.temperatureMax),
-          icon: day.icon
-        }
-      }).slice(0,5);
-
+      $scope.forecast = weatherHelper.normalizeForecast(weatherData.body.daily.data).slice(0,5);
     }]);

@@ -51,8 +51,10 @@
 .weather-day{
   color: #aaa;
 }
-.weather-response .panel h1{
+.weather-response .panel p{
   display: inline;
+  font-size: 40px;
+  font-family: "HelveticaNeue-UltraLight";
 }
 
 .news-content, .talk-result{

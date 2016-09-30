@@ -99,6 +99,15 @@ angular
           }
         }
       })
+      .state('farmacias', {
+        url: '/farmacias',
+        params: { response: null },
+        views: {
+          'content': {
+            'template': '<pharmacies-response/>'
+          }
+        }
+      })
     /* 
     .state('eventos', {
         url: '/events',
@@ -115,15 +124,6 @@ angular
         views: {
           'content': {
             'template': '<next-holliday-response/>'
-          }
-        }
-      })
-    .state('farmacias', {
-        url: '/pharmacies',
-        params: { response: null },
-        views: {
-          'content': {
-            'template': '<pharmacies-response/>'
           }
         }
       })*/

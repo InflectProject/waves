@@ -42,6 +42,18 @@
   top:40%;
   right:15px;
 }
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ultralight{
+  font-family: "HelveticaNeue-UltraLight";
+}
+.light{
+  font-family: "HelveticaNeue-UltraLight";
+  font-size: 1.15em;
+}
 body {
   padding: 0;
   background-color: black;

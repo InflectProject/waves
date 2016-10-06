@@ -8,13 +8,21 @@
  * Controller of the wavesApp
  */
 angular.module('wavesApp')
-  .controller('WeatherCtrl', ['$rootScope', '$scope', 'weatherHelper', 'weatherWord', function ($rootScope, $scope, weatherHelper, weatherWord) {
-      //Clima :: Iconos que llegan
-      //         https://erikflowers.github.io/weather-icons/api-list.html
+  .controller('WeatherCtrl', ['$rootScope', '$scope', 'weatherHelper', 'weatherWord', '$state',
+    function ($rootScope, $scope, weatherHelper, weatherWord, $state) {
+      try{
 
-      var weatherData=$rootScope.startupData.filter(function(data){
-       return data.word == weatherWord;
-      }).shift();
+        //Clima :: Iconos que llegan
+        //         https://erikflowers.github.io/weather-icons/api-list.html
 
-      $scope.forecast = weatherHelper.normalizeForecast(weatherData.body.daily.data).slice(0,5);
+        var weatherData=$rootScope.startupData.filter(function(data){
+         return data.word === weatherWord;
+        }).shift();
+
+        $scope.forecast = weatherHelper.normalizeForecast(weatherData.body.daily.data).slice(0,5);
+      }catch(e){
+        console.warn(e);
+        $state.go('boot');
+      }
+
     }]);

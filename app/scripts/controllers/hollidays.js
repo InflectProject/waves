@@ -8,18 +8,16 @@
  * Controller of the wavesApp
  */
 angular.module('wavesApp')
-  .controller('HollidaysCtrl', ['$rootScope', '$scope', 'hollidaysWord', function ($rootScope, $scope, hollidaysWord) {
+  .controller('HollidaysCtrl', ['$rootScope', '$scope', 'hollidaysWord', 'hollidayHelper', '$state', 
+    function ($rootScope, $scope, hollidaysWord, hollidayHelper, $state) {
+    try{      
       var hollidaysData=$rootScope.startupData.filter(function(data){
-         return data.word==hollidaysWord;
+         return data.word===hollidaysWord.join(', ');
         }).shift();
-
-      $scope.hollidays = [
-        { 
-          desc: hollidaysData.body.motivo, 
-          inDays: moment( moment().format('YYYY') + '-' + 
-                        hollidaysData.body.mes + '-' + 
-                        hollidaysData.body.dia)
-                .fromNow()
-        },
-      ];
-    }]);
+      
+      $scope.hollidays = hollidayHelper.normalizeHollidays(hollidaysData.body);
+    }catch(e){
+      console.warn(e);
+      $state.go('boot');
+    }
+  }]);

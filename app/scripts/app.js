@@ -131,8 +131,8 @@ angular
   });
 
  angular
-  .module('wavesApp').run(['$rootScope', 'speechSynthesis', 'speechRecognition', '$state', '$timeout', '$interval', 'InflectionsAPIService', 'responseRedirector',
-    function($rootScope, speechSynthesis, speechRecognition, $state, $timeout, $interval, InflectionsAPIService, ResponseRedirectorService){
+  .module('wavesApp').run(['$rootScope', 'speechRecognition', '$state',
+    function($rootScope, speechRecognition, $state){
       var speechRecognizer;
       $rootScope.speechResult={};
 
@@ -170,13 +170,24 @@ angular
       }
 
       
-      $rootScope.$on('$stateChangeStart', function(ev, next, nextParams, from, fromParams){
-        if((from.name != next.name) && (next.name == "active_screen") && ($rootScope.speechRecognition) && ($rootScope.speechRecognition.isStopped())){
-          try{
-            $rootScope.speechRecognition && $rootScope.speechRecognition.start();
-          }catch(e){
-            console.warn(e);
+      $rootScope.$on('$stateChangeStart', function(ev, next, nextParams, from){
+        if(from.name === next.name){
+          ev.preventDefault();
+          return false;
+        }else{
+          if( ( (next.name === "boot") || 
+                (next.name === "active_screen") ) && 
+              ($rootScope.speechRecognition) && 
+              ($rootScope.speechRecognition.isStopped())
+            ){
+            try{
+              ($rootScope.speechRecognition) && $rootScope.speechRecognition.start();
+            }catch(e){
+              console.warn(e);
+            }
           }
         }
+        
+
       });
     }]);

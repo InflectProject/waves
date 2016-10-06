@@ -12,7 +12,7 @@ angular.module('wavesApp')
         templateUrl: 'views/directives/voicewave_visualizer.html',
         replace: true,
         restrict: 'E', 
-        link: function postLink(scope, element, attrs) {
+        link: function postLink(scope, element) {
           voiceVisualizer.init(element.find('#visualizer').get(0)).visualize();
         }
       };

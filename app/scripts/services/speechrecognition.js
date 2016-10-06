@@ -30,7 +30,7 @@ angular.module('wavesApp')
             ++countResults;
             var result = self.reduceResult(complete_result);
 
-            if(countResults==1){
+            if(countResults===1){
               listeners.onfirstresult(result);
             }
             listeners.onresult(result);

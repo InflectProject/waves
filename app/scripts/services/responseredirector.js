@@ -10,7 +10,7 @@
 angular.module('wavesApp')
   .service('responseRedirector', ['$state', function ($state) {
     function noServiceFound(status){
-      return status == 'not_found';
+      return status === 'not_found';
     }
 
     return {

@@ -1,5 +1,8 @@
 <div class="hollidays">
-  <p ng-repeat="holliday in hollidays" class="holliday-item">
-    <span>{{ holliday.desc }}</span><span class="pull-right"> {{ holliday.inDays }}</span>
+  <p ng-repeat="holliday in hollidays" class="holliday-item row">
+    <span class="col-xs-8 truncate"><!-- <span class="ultralight">{{::holliday.day}}/{{::holliday.month}}</span>  -->{{::holliday.desc }}</span>
+    <span class="col-xs-4"> 
+      <span class="light pull-right">{{::holliday.inDays }}</span>
+    </span>
   </p>
 </div>

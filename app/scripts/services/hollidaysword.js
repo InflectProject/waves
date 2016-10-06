@@ -8,4 +8,4 @@
  * Constant in the wavesApp.
  */
 angular.module('wavesApp')
-  .constant('hollidaysWord', "FERIADOS");
+  .constant('hollidaysWord', ["FERIADOS", "PROXIMOS"]);

@@ -31,7 +31,7 @@ angular.module('wavesApp')
         lastWasInterimTimeout = lastWasInterimTimeout || 
           $timeout(function(text){
             $scope.speechResult.isInterim=false;
-            stopRecognitionAndSend(result.text);
+            stopRecognitionAndSend(text);
           }, 3000, true, result.text);
 
         lastWasInterim=true;

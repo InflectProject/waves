@@ -45,7 +45,10 @@
   letter-spacing: 0px;
   font-family: "HelveticaNeue-Light";
 }
-.weather-min-temp, .weather-max-temp{
+.weather-min-temp{
+  font-family: "HelveticaNeue-UltraLight";
+} 
+.weather-max-temp{
   font-family: "HelveticaNeue-Medium";
 }
 .weather-day{

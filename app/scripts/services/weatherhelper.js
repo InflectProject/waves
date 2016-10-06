@@ -18,8 +18,8 @@ angular.module('wavesApp')
             max: Math.ceil(day.temperatureMax),
             summary: day.summary,
             icon: day.icon
-          }
+          };
         });
       }
-    }
+    };
   });

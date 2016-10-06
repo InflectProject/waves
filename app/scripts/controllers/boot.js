@@ -16,7 +16,7 @@ angular.module('wavesApp')
         .then(function(results){
           var startupData = results.map(function(result){
             return { 
-              word: result.data.attributes.query_words[0], 
+              word: result.data.attributes.query_words.join(', '), 
               body: result.data.content.body 
             };
           });

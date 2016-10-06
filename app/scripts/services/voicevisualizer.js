@@ -17,7 +17,7 @@ angular.module('wavesApp')
       var audioCtx = new ($window.AudioContext || $window.webkitAudioContext)();
       
       var source;
-      var stream;
+      // var stream;
   
       var analyser = audioCtx.createAnalyser();
       analyser.minDecibels = -90;
@@ -76,7 +76,7 @@ angular.module('wavesApp')
                 
                 $window.cancelAnimationFrame(drawVisual);
               },
-              function(err) {
+              function err() {
                 // console.log('The following gUM error occured: ' + err);
               });
           } else {
@@ -153,7 +153,7 @@ angular.module('wavesApp')
               return 0.1 + Math.pow(Math.sin(x),2) + 0.35*Math.pow(Math.E, -0.5*Math.pow((x/0.4),2));
             }
             function H(x){
-              return Math.cos(21*x)
+              return Math.cos(21*x);
             }
             function G(x){
               return Math.pow(Math.E, (-0.5*Math.pow(((x-0.15)/0.10), 2)));
@@ -195,7 +195,7 @@ angular.module('wavesApp')
           }
           drawSimple();
         }
-      }
+      };
     }]);
 /*function map ( value, in_min , in_max , out_min , out_max ) {
   return ( value - in_min ) * ( out_max - out_min ) / ( in_max - in_min ) + out_min;

@@ -14,7 +14,8 @@ angular.module('wavesApp')
           continuous: false,
           interimResults: true,
           lang: 'en-US'
-        };
+        },
+        noSpeechDetected;
 
     return {
       init: function(options, listeners){
@@ -25,6 +26,20 @@ angular.module('wavesApp')
           recognizer = new $window.SpeechRecognition();
 
           options = angular.extend({}, defaultOptions, options);
+
+          options.onerror = function (e) {
+            (listeners.onerror) && listeners.onerror(e);
+            noSpeechDetected = (e.error == 'no-speech')
+          }
+          options.onend   = function () {
+            (listeners.onend) && listeners.onend();
+            
+            if(noSpeechDetected) {
+              self.stop();
+              self.start();
+              noSpeechDetected=false;
+            }
+          }
 
           options.onresult=function(complete_result){
             ++countResults;

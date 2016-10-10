@@ -17,7 +17,7 @@ angular.module('wavesApp')
       var audioCtx = new ($window.AudioContext || $window.webkitAudioContext)();
       
       var source;
-      // var stream;
+      var stream;
   
       var analyser = audioCtx.createAnalyser();
       analyser.minDecibels = -90;

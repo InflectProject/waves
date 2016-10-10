@@ -20,7 +20,8 @@ angular
     'ui.router',
     'puigcerber.capitalize',
     'ngHolder',
-    'pascalprecht.translate'
+    'pascalprecht.translate',
+    'LocalStorageModule'
   ])
   .config(function ($stateProvider, $routeProvider) {
     $routeProvider
@@ -128,6 +129,9 @@ angular
         }
       })*/
       ;
+  })
+  .config(function (localStorageServiceProvider) {
+    localStorageServiceProvider.setPrefix('waves');
   });
 
  angular
@@ -156,7 +160,7 @@ angular
               $state.go('talking');
             },
             onresult: function(result){
-              $rootScope.$emit("onresult", result);
+              $rootScope.$emit("speech:result", result);
             }
           }
         );

@@ -8,20 +8,25 @@
  * Controller of the wavesApp
  */
 angular.module('wavesApp')
-  .controller('BootCtrl', ['$rootScope', '$state', 'InflectionsAPIService', 'hollidaysWord',  'weatherWord', 'newsWord', 
-    function ($rootScope, $state, InflectionsAPIService, hollidaysWord, weatherWord, newsWord) {
+  .controller('BootCtrl', ['$rootScope', '$state', 'InflectionsAPIService', 
+                           'hollidaysWord',  'weatherWord', 'newsWord', 
+                           'localStorageService', 
+    function ($rootScope, $state, InflectionsAPIService, 
+              hollidaysWord, weatherWord, newsWord, 
+              localStorageService) {
       //Palabras :: {k*: v} => k: palabras reconocidas, v: parametros/acciones validas
-
+      localStorageService.clearAll();
+      
       InflectionsAPIService.fetchStartupData([hollidaysWord, weatherWord, newsWord])
         .then(function(results){
-          var startupData = results.map(function(result){
-            return { 
-              word: result.data.attributes.query_words.join(', '), 
-              body: result.data.content.body 
-            };
+          results.forEach(function(result){
+            if(result.data.content.body===undefined){
+              localStorageService.set(result.data.attributes.query_words.join(', '), result.data.content.body);
+            }else{
+              console.error("Check on Inflections why the service with query_word \""+result.data.attributes.query_words.join(', ')+"\" returns undefined.");
+            }
           });
           
-          $rootScope.startupData=startupData;
           $state.go('active_screen');
         });
     }]);

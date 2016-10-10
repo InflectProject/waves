@@ -8,16 +8,13 @@
  * Controller of the wavesApp
  */
 angular.module('wavesApp')
-  .controller('HollidaysCtrl', ['$rootScope', '$scope', 'hollidaysWord', 'hollidayHelper', '$state', 
-    function ($rootScope, $scope, hollidaysWord, hollidayHelper, $state) {
-    try{      
-      var hollidaysData=$rootScope.startupData.filter(function(data){
-         return data.word===hollidaysWord.join(', ');
-        }).shift();
-      
-      $scope.hollidays = hollidayHelper.normalizeHollidays(hollidaysData.body);
+  .controller('HollidaysCtrl', ['$rootScope', '$scope', 'hollidaysWord', 'hollidayHelper', '$state', 'localStorageService', 
+    function ($rootScope, $scope, hollidaysWord, hollidayHelper, $state, localStorageService) {
+    try{
+      var hollidaysData= localStorageService.get(hollidaysWord.join(', '));
+      $scope.hollidays = hollidayHelper.normalizeHollidays(hollidaysData);
     }catch(e){
       console.warn(e);
-      $state.go('boot');
+      // $state.go('boot');
     }
   }]);

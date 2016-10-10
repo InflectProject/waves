@@ -8,17 +8,14 @@
  * Controller of the wavesApp
  */
 angular.module('wavesApp')
-  .controller('NewsCtrl', ['$rootScope', '$scope', '$interval', '$timeout', 'newsWord', '$state',
-    function ($rootScope, $scope, $interval, $timeout, newsWord, $state) {
+  .controller('NewsCtrl', ['$rootScope', '$scope', '$interval', '$timeout', 'newsWord', '$state','localStorageService',
+    function ($rootScope, $scope, $interval, $timeout, newsWord, $state, localStorageService) {
       try{
-        var newsData=$rootScope.startupData.filter(function(data){
-         return data.word === newsWord;
-        }).shift();
-        
-        $scope.pageSize = newsData.body.length;
+        var newsData = localStorageService.get(newsWord);
+        $scope.pageSize = newsData.length;
     
         $scope.news={
-          latest: newsData.body, 
+          latest: newsData, 
           current: "",
           currentIndex: 0,
           show: true
@@ -39,6 +36,6 @@ angular.module('wavesApp')
         }, 10000);
       }catch(e){
         console.warn(e);
-        $state.go('boot');
+        // $state.go('boot');
       }
     }]);

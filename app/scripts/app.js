@@ -20,7 +20,8 @@ angular
     'ui.router',
     'puigcerber.capitalize',
     'ngHolder',
-    'pascalprecht.translate'
+    'pascalprecht.translate',
+    'LocalStorageModule'
   ])
   .config(function ($stateProvider, $routeProvider) {
     $routeProvider
@@ -128,6 +129,9 @@ angular
         }
       })*/
       ;
+  })
+  .config(function (localStorageServiceProvider) {
+    localStorageServiceProvider.setPrefix('waves');
   });
 
  angular

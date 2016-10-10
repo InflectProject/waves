@@ -8,12 +8,15 @@
  * Controller of the wavesApp
  */
 angular.module('wavesApp')
-  .controller('ListResponseCtrl', ['$scope', '$state', '$stateParams', function ($scope, $state, $stateParams) {
+  .controller('ListResponseCtrl', ['$rootScope', '$scope', '$state', '$stateParams',
+   function ($rootScope, $scope, $state, $stateParams) {
     if($stateParams.response){
       $scope.response = {
         body: $stateParams.response.content.body, 
         title: $stateParams.response.content.title
       };
+
+      $rootScope.speechRecognition.start();
     }else{
       $state.go('boot')
     }

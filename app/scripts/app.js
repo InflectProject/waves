@@ -160,7 +160,7 @@ angular
               $state.go('talking');
             },
             onresult: function(result){
-              $rootScope.$emit("onresult", result);
+              $rootScope.$emit("speech:result", result);
             }
           }
         );

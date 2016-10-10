@@ -8,8 +8,8 @@
  * Controller of the wavesApp
  */
 angular.module('wavesApp')
-  .controller('SimpleResponseCtrl', ['$rootScope', '$scope', '$state', '$stateParams', 'speechSynthesis', '$timeout', 
-    function ($rootScope, $scope, $state, $stateParams, speechSynthesis, $timeout) {
+  .controller('SimpleResponseCtrl', ['$rootScope', '$scope', '$state', '$stateParams', 'speechSynthesis', 
+    function ($rootScope, $scope, $state, $stateParams, speechSynthesis) {
     if($stateParams.response){
       $scope.response = $stateParams.response.content;
       speechSynthesis.say($scope.response, {lang:'es-AR'}, {

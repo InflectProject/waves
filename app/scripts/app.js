@@ -139,16 +139,7 @@ angular
     function($rootScope, speechRecognition, $state){
       var speechRecognizer;
       $rootScope.speechResult={};
-
-/*    TODO:: Create a decorator!  
-      function speechResultTransformer(result){
-        var r = speechRecognizer.reduceResult(result)
-        var extractedSvcKey = $rootScope.initialData.grammars.keys.difference(r.text.split(" "))
-        if(extractedSvcKey){
-          var params_actions=$rootScope.initialData.grammars[extractedSvcKey].difference(r.text.split(" "))
-        }
-      }*/
-
+      
       try{
         speechRecognizer = speechRecognition.init( 
           { 

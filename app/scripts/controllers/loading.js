@@ -8,10 +8,16 @@
  * Controller of the wavesApp
  */
 angular.module('wavesApp')
-  .controller('LoadingCtrl', ['$state', '$stateParams', 'InflectionsAPIService', 'responseRedirector', 
-    function ($state, $stateParams, InflectionsAPIService, ResponseRedirectorService) {
+  .controller('LoadingCtrl', ['$state', '$stateParams', 'InflectionsAPIService', 
+    'responseRedirector', 'keywordHelper',
+    function ($state, $stateParams, InflectionsAPIService, ResponseRedirectorService, keywordHelper) {
       if($stateParams.text){
-        InflectionsAPIService.sendRecognition($stateParams.text).then(ResponseRedirectorService.redirect);
+        var match=keywordHelper.findMatch($stateParams.text);
+        if(match.length>0){
+          InflectionsAPIService.sendRecognition(match[0]).then(ResponseRedirectorService.redirect);
+        }else{
+          $state.go('active_screen');  
+        }
       }else{
         $state.go('boot');
       }

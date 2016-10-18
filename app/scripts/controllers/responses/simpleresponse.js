@@ -12,11 +12,11 @@ angular.module('wavesApp')
     function ($rootScope, $scope, $state, $stateParams, speechSynthesis) {
     if($stateParams.response){
       $scope.response = $stateParams.response.content;
-      speechSynthesis.say($scope.response, {lang:'es-AR'}, {
-        onend: function(e) {
+      // speechSynthesis.say($scope.response, {lang:'es-AR'}, {
+      //   onend: function(e) {
           $rootScope.speechRecognition.start();
-        }
-      });
+      //   }
+      // });
     }else{
       $state.go('boot')
     }

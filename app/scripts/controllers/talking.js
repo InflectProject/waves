@@ -10,11 +10,12 @@
 angular.module('wavesApp')
   .controller('TalkingCtrl', ['$rootScope', '$state', '$stateParams', '$scope', '$timeout', function ($rootScope, $state, $stateParams, $scope, $timeout) {
     $scope.speechResult={};
-    var lastWasInterim=false, lastWasInterimTimeout;
+    var lastWasInterimTimeout;
 
     function stopRecognitionAndSend(textSpeech){
       $timeout.cancel(lastWasInterimTimeout);
-      $rootScope.speechRecognition.stop();
+      // $rootScope.speechRecognition.stop();
+      annyang.pause();
 
       $timeout(function(text) {
         $state.go('loading', {text: text});
@@ -22,19 +23,21 @@ angular.module('wavesApp')
     }
 
     $rootScope.$on("speech:result", function(e, result){
+      console.info("speech:result", result)
       $scope.speechResult.isInterim = !result.final;
       $scope.speechResult.result = result.text;
 
-      if(result.final){
-        stopRecognitionAndSend(result.text);
-      }else{
-        lastWasInterimTimeout = lastWasInterimTimeout || 
-          $timeout(function(text){
-            $scope.speechResult.isInterim=false;
-            stopRecognitionAndSend(text);
-          }, 3000, true, result.text);
-
-        lastWasInterim=true;
+      // stopRecognitionAndSend(result.text);
+      if($scope.speechResult.isInterim){      
+        if(result.final){
+          stopRecognitionAndSend(result.text);
+        }else{
+          lastWasInterimTimeout = lastWasInterimTimeout || 
+            $timeout(function(text){
+              $scope.speechResult.isInterim=false;
+              stopRecognitionAndSend(text);
+            }, 3000, true, result.text);
+        }
       }
     });
   }]);

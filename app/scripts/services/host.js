@@ -8,4 +8,5 @@
  * Constant in the wavesApp.
  */
 angular.module('wavesApp')
-  .constant('HOST', 'https://inflections.herokuapp.com');
+  // .constant('HOST', 'https://inflections.herokuapp.com');
+  .constant('HOST', 'http://localhost:4567');

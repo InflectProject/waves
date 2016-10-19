@@ -135,54 +135,56 @@ angular
   });
 
  angular
-  .module('wavesApp').run(['$rootScope', 'speechRecognition', '$state',
-    function($rootScope, speechRecognition, $state){
-      var speechRecognizer;
-      $rootScope.speechResult={};
-      
-      try{
-        speechRecognizer = speechRecognition.init( 
-          { 
-            lang: 'es-AR', 
-            continuous: true 
-          }, 
-          {
-            onfirstresult: function(){
-              $state.go('talking');
-            },
-            onresult: function(result){
-              $rootScope.$emit("speech:result", result);
-            }
-          }
-        );
+  .module('wavesApp').run(['$rootScope', '$state', '$timeout', 'keywordHelper',
+    function($rootScope, $state, $timeout, keywordHelper){
+      var responseTimeout=null;
+
+      annyang.addCommands({
+        '*allSpeech': function(allSpeech){       
+          if(!$state.is('talking')) $state.go('talking');
+          console.info("COMMAND:", allSpeech);
+          $rootScope.$emit("speech:result", {text: allSpeech, final: true});
+        }
+      });
+
+      annyang.addCallback('result', function(userSaid) {
+        // if(!$state.is('talking')) $state.go('talking');
         
-        speechRecognizer.start();
+        $timeout.cancel(responseTimeout);
+        /*
+        $timeout(function(){
+          $rootScope.$emit("speech:result", {text: userSaid[0], final: false});
+        }, 10);*/
+      });
+      annyang.addCallback('resultMatch', function(userSaid/*, commandText, phrases*/) {
+        // $rootScope.$emit("speech:result", {text: userSaid, final: true});
+      });
 
-        $rootScope.speechRecognition=speechRecognizer;
-      }catch(e){
-        //TODO:: Move message to active_screen as thin navbar
-        console.warn({result: e.message, speechRecognitionNotSupported: true});
-      }
+      annyang.addCallback('error', function(e) {
+        if(e.error !== 'no-speech')
+          console.error("ANNYANG:error", e);
+      });
+      annyang.addCallback('errorNetwork', function(e) {
+        console.error("ANNYANG:errorNetwork", e);
+      });
+      annyang.addCallback('errorPermissionBlocked', function(e) {
+        console.error("ANNYANG:errorPermissionBlocked", e);
+      });
+      annyang.addCallback('errorPermissionDenied', function(e) {
+        console.error("ANNYANG:errorPermissionDenied", e);
+      });
 
+      annyang.debug(true);
+      
+      annyang.setLanguage('es-AR');
+      annyang.start({ autoRestart: true, continuous: true });
       
       $rootScope.$on('$stateChangeStart', function(ev, next, nextParams, from){
-        if(from.name === next.name){
-          ev.preventDefault();
-          return false;
-        }else{
-          if( ( (next.name === "boot") || 
-                (next.name === "active_screen") ) && 
-              ($rootScope.speechRecognition) && 
-              ($rootScope.speechRecognition.isStopped())
-            ){
-            try{
-              ($rootScope.speechRecognition) && $rootScope.speechRecognition.start();
-            }catch(e){
-              console.warn(e);
-            }
-          }
+        if(['loading', 'not_found', 'clima', 'farmacias', 'noticias'].indexOf(next.name)!== -1){
+          annyang.resume();
+          responseTimeout=$timeout(function() {
+            $state.go('active_screen');
+          }, 15000);
         }
-        
-
       });
     }]);

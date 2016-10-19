@@ -36,6 +36,7 @@ module.exports = function(config) {
       'bower_components/angular-holderjs/src/holder.js',
       'bower_components/moment/moment.js',
       'bower_components/angular-local-storage/dist/angular-local-storage.js',
+      'bower_components/annyang/dist/annyang.min.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/angular-translate/angular-translate.js',
       // endbower

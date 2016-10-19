@@ -8,16 +8,17 @@
  * Controller of the wavesApp
  */
 angular.module('wavesApp')
-  .controller('BootCtrl', ['$rootScope', '$state', 'InflectionsAPIService', 
-                           'hollidaysWord',  'weatherWord', 'newsWord', 
-                           'localStorageService', 
+  .controller('BootCtrl', 
+              ['$rootScope', '$state', 'InflectionsAPIService', 
+               'hollidaysWord',  'weatherWord', 'newsWord', 'keywordsWord', 
+               'localStorageService', 
     function ($rootScope, $state, InflectionsAPIService, 
-              hollidaysWord, weatherWord, newsWord, 
+              hollidaysWord, weatherWord, newsWord, keywordsWord, 
               localStorageService) {
-      //Palabras :: {k*: v} => k: palabras reconocidas, v: parametros/acciones validas
+      
       localStorageService.clearAll();
       
-      InflectionsAPIService.fetchStartupData([hollidaysWord, weatherWord, newsWord])
+      InflectionsAPIService.fetchStartupData([hollidaysWord, weatherWord, newsWord, keywordsWord])
         .then(function(results){
           results.forEach(function(result){
             if(result.data.content.body!==undefined){

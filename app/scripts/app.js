@@ -166,6 +166,13 @@ angular
 
       
       $rootScope.$on('$stateChangeStart', function(ev, next, nextParams, from){
+        if(['loading', 'not_found', 'clima', 'farmacias', 'noticias'].indexOf(next.name)!== -1){
+          ($rootScope.speechRecognition) && $rootScope.speechRecognition.start();
+          responseTimeout=$timeout(function() {
+            $state.go('active_screen');
+          }, 15000);
+        }
+        
         if(from.name === next.name){
           ev.preventDefault();
           return false;

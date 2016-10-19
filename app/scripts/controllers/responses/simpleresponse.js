@@ -14,7 +14,7 @@ angular.module('wavesApp')
       $scope.response = $stateParams.response.content;
       // speechSynthesis.say($scope.response, {lang:'es-AR'}, {
       //   onend: function(e) {
-          $rootScope.speechRecognition.start();
+          // $rootScope.speechRecognition.start();
       //   }
       // });
     }else{

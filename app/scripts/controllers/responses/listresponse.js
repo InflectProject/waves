@@ -16,7 +16,7 @@ angular.module('wavesApp')
         title: $stateParams.response.content.title
       };
 
-      $rootScope.speechRecognition.start();
+      // $rootScope.speechRecognition.start();
     }else{
       $state.go('boot')
     }

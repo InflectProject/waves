@@ -1,7 +1,6 @@
 <div class="col-md-12 newsContent news">
   <p ng-repeat="notice in news.latest track by $index">
     <span class="news-content" ng-show="$index == news.currentIndex && news.show">
-      <i class="fa fa-twitter"></i>
       {{notice}}
     </span>
   </p>
